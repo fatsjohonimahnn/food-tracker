@@ -107,7 +107,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New Meal" id="5j2-lb-dwt">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="coU-Cy-PS3"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="coU-Cy-PS3">
+                            <connections>
+                                <action selector="cancel:" destination="BYZ-38-t0r" id="rej-dP-X5a"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Save" id="84l-Sz-WVR">
                             <connections>
                                 <segue destination="1gU-GU-msv" kind="unwind" unwindAction="unwindToMealList:" id="kcC-ud-kG0"/>
