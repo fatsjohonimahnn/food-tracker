@@ -23,20 +23,34 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="89.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="WPr-yi-vHT">
-                                            <rect key="frame" x="0.0" y="-1" width="90" height="89.5"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="WPr-yi-vHT">
+                                            <rect key="frame" x="0.0" y="0.0" width="90" height="89.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="90" id="ldi-cY-Jei"/>
+                                                <constraint firstAttribute="height" constant="90" id="sNM-nD-PLy"/>
+                                            </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R9T-kW-g8y">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="494" placeholderIntrinsicHeight="21" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R9T-kW-g8y">
                                             <rect key="frame" x="98" y="8" width="494" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pD1-jv-11M" customClass="RatingControl" customModule="FoodTracker" customModuleProvider="target">
-                                            <rect key="frame" x="98" y="37" width="240" height="44"/>
+                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pD1-jv-11M" customClass="RatingControl" customModule="FoodTracker" customModuleProvider="target">
+                                            <rect key="frame" x="98" y="37" width="494" height="44"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="WPr-yi-vHT" firstAttribute="top" secondItem="M5l-Ps-7ah" secondAttribute="top" id="BG1-Ol-Uyg"/>
+                                        <constraint firstItem="pD1-jv-11M" firstAttribute="leading" secondItem="WPr-yi-vHT" secondAttribute="trailing" constant="8" id="Qp6-UA-p1S"/>
+                                        <constraint firstAttribute="trailing" secondItem="pD1-jv-11M" secondAttribute="trailing" constant="8" id="TvR-qa-zDQ"/>
+                                        <constraint firstItem="R9T-kW-g8y" firstAttribute="leading" secondItem="WPr-yi-vHT" secondAttribute="trailing" constant="8" id="cAa-mx-iOz"/>
+                                        <constraint firstAttribute="bottom" secondItem="pD1-jv-11M" secondAttribute="bottom" constant="8" id="h0Z-Wl-Ffz"/>
+                                        <constraint firstItem="pD1-jv-11M" firstAttribute="top" secondItem="R9T-kW-g8y" secondAttribute="bottom" constant="8" id="tML-TR-uaf"/>
+                                        <constraint firstItem="R9T-kW-g8y" firstAttribute="top" secondItem="M5l-Ps-7ah" secondAttribute="topMargin" id="twG-Pj-Qdy"/>
+                                        <constraint firstItem="WPr-yi-vHT" firstAttribute="leading" secondItem="M5l-Ps-7ah" secondAttribute="leading" id="y3t-HZ-rQd"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="nameLabel" destination="R9T-kW-g8y" id="Jb2-6x-ThP"/>
@@ -83,11 +97,15 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="320" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="yis-NB-bST">
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="320" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="yis-NB-bST">
                                         <rect key="frame" x="120" y="42" width="320" height="320"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="yis-NB-bST" secondAttribute="height" multiplier="1:1" id="NeV-jY-zCq"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="rgg-bI-jsR" appends="YES" id="Ice-Rj-xw0"/>
+                                        </connections>
                                     </imageView>
                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="44" translatesAutoresizingMaskIntoConstraints="NO" id="G82-2O-X5F" userLabel="Rating Control" customClass="RatingControl" customModule="FoodTracker" customModuleProvider="target">
                                         <rect key="frame" x="160" y="374" width="240" height="44"/>
@@ -113,9 +131,9 @@
                                 <action selector="cancel:" destination="BYZ-38-t0r" id="rej-dP-X5a"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="84l-Sz-WVR">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="84l-Sz-WVR">
                             <connections>
-                                <segue destination="1gU-GU-msv" kind="unwind" unwindAction="unwindToMealList:" id="kcC-ud-kG0"/>
+                                <segue destination="1gU-GU-msv" kind="unwind" unwindAction="unwindToMealList:" id="UC8-PK-Ibq"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -128,9 +146,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <exit id="1gU-GU-msv" userLabel="Exit" sceneMemberID="exit"/>
-                <tapGestureRecognizer id="tah-sU-njz">
+                <tapGestureRecognizer id="rgg-bI-jsR">
                     <connections>
-                        <action selector="selectImageFromPhotoLibrary:" destination="BYZ-38-t0r" id="0ux-AG-uQp"/>
+                        <action selector="selectImageFromPhotoLibrary:" destination="BYZ-38-t0r" id="TLq-pZ-r73"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

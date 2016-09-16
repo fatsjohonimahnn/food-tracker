@@ -88,7 +88,7 @@ class MealTableViewController: UITableViewController {
                 // Update an existing meal
                 meals[selectedIndexPath.row] = meal
                 // Update the tableView
-                tableView.insertRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
+                tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
             }
             else {
                 // Add a new meal
