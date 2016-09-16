@@ -42,6 +42,7 @@
                                     <outlet property="nameLabel" destination="R9T-kW-g8y" id="Jb2-6x-ThP"/>
                                     <outlet property="photoImageView" destination="WPr-yi-vHT" id="Xhc-Ve-O2g"/>
                                     <outlet property="ratingControl" destination="pD1-jv-11M" id="eHA-PD-fxe"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="showDetail" id="6C4-Mg-POt"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -53,14 +54,14 @@
                     <navigationItem key="navigationItem" title="Your Meals" id="dE9-jQ-Iv7">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="gYh-2M-d0e">
                             <connections>
-                                <segue destination="NG8-nh-yHh" kind="presentation" identifier="AddItem" id="1Hv-It-dPH"/>
+                                <segue destination="NG8-nh-yHh" kind="presentation" identifier="addItem" id="1Hv-It-dPH"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t2s-Mq-Nh7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="396" y="399"/>
+            <point key="canvasLocation" x="1137" y="372"/>
         </scene>
         <!--New Meal-->
         <scene sceneID="tne-QT-ifu">
@@ -169,10 +170,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wm3-wv-cMk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1137" y="399"/>
+            <point key="canvasLocation" x="1180" y="1205"/>
         </scene>
     </scenes>
     <resources>
         <image name="defaultPhoto" width="540" height="540"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="6C4-Mg-POt"/>
+    </inferredMetricsTieBreakers>
 </document>
