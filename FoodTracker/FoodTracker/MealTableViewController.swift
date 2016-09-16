@@ -71,16 +71,28 @@ class MealTableViewController: UITableViewController {
     @IBAction func unwindToMealList(sender: UIStoryboardSegue) {
         
         if let sourceViewController = sender.sourceViewController as? MealViewController, meal = sourceViewController.meal {
-            // Add a new meal.
-            let newIndexPath = NSIndexPath(forRow: meals.count, inSection: 0)
             
-            // add the new meal to the existing list of meals in the data model.
-            meals.append(meal)
+            // check if a row is selected
+            if let selectedIndexPath = tableView.indexPathForSelectedRow{
+                
+                // Update an existing meal
+                meals[selectedIndexPath.row] = meal
+                // Update the tableView
+                tableView.insertRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
+            }
+            else {
+                // Add a new meal
+                let newIndexPath = NSIndexPath(forRow: meals.count, inSection: 0)
+                // append the meal to the array meals
+                meals.append(meal)
+                // insert the meal into the tableView
+                tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
+                
+            }
             
-            // The .Bottom animation option shows the inserted row slide in from the bottom
-            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
         }
     }
+
     
     // MARK: - Navigation
     
