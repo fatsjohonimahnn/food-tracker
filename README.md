@@ -1,57 +1,104 @@
 # food-tracker
 Track and rate meals
 
-This project was created from Apple's Start Developing iOS Apps (Swift)
+This project was created from Apple's Start Developing iOS Apps
 
 https://developer.apple.com/library/content/referencelibrary/GettingStarted/DevelopiOSAppsSwift/index.html#//apple_ref/doc/uid/TP40015214-CH2-SW1
 
-Below is a list of notes taken from the site that I felt was most important for junior developers... enjoy!
+Below is a list of notes taken from the site that helped me and may be important for junior developers... enjoy!
 
-FoodTracker
+Briefly Covers:
 
-https://developer.apple.com/library/content/referencelibrary/GettingStarted/DevelopiOSAppsSwift/Lesson4.html#//apple_ref/doc/uid/TP40015214-CH6-SW1
+Fixing Stack Views
+Configuring text field’s keyboard
+About Delegates
+Set up the UITextFieldDelegate
+	First Responders
+Work With View Controllers
+Image View Aspect Ratios & Interactions
+Tap gesture recognizer
+	Create an Image Picker to Respond to User Taps
+Implement A Custom Control
+	Custom UIView
+	Add Buttons to the View (programmatically)
+	Implement the Button Action
+Define Your Data Model
+	Unit Tests
+Create a Table View
+	Turn off Cell highlighting when user taps
+	Turn off user interaction with cell contents but allow click to segue
+UITableViewDataSource protocol and UITableViewDelegate protocol
+Implement Navigation
+Create an Unwind Segue 1/2
+Disable Saving When the User Doesn't Enter an Item Name
+Cancel button - dismissViewController
+Implement Edit and Delete Behavior
+Update the implementation of unwindToMealList(_:) to add or replace meals 2/2
+Cancel an Edit to an Existing Meal
+Support Deletion
+Persist Data
 
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------
+Fixing Stack Views 
+	AL issues
 
 Stack View > Pin > Update Frames: Items of New Constraints
 
-If stack view creating issues, select the object go to siin
+Do this with the objects causing issues:
+
+select the object go to siin (size inspector)
 	at bottom: 
 		intrinsic size: Placeholder
 
-	Do this with the objects causing issues
 
 ----------------------------------------------------------------
-To configure the text field’s keyboard
+Configuring text field’s keyboard
 
-Make sure the text field is still selected.
+Make sure the text field is selected.
 
-In Atin > Return Key
-	select Done.
-		This change will make the default Return key on the keyboard more pronounced to the user by changing it into a Done key.
+In Atin (attributes inspector) > Return Key
+	select Done
+		Makes the default "Return" key show "Done"
 
 In Atin, 
 	select: Auto-enable Return Key
-		This change makes it impossible for the user to tap the Done key before typing text into the text field, 
-		ensuring that users can never enter an empty string as a meal name.
+		Makes it impossible to tap "Done" key before typing text
+			ensures users can never enter an empty string
 
-------------------------------------------------------------------------------
+------------------------------------------------------------------
 
 https://developer.apple.com/library/content/referencelibrary/GettingStarted/DevelopiOSAppsSwift/Lesson3.html#//apple_ref/doc/uid/TP40015214-CH22-SW1
 
 UITextFieldDelegate
 
-When you work with accepting user input from a text field, you need some help from a text field delegate. 
-	A delegate is an object that acts on behalf of, or in coordination with, another object. 
-	-The delegating object— 
-		"the text field" 
-			—keeps a reference for the other object which is:
-	—the delegate—
-		"the ViewController"
-		and at the appropriate time, the delegating object sends a message to the delegate. 
-			The message tells the delegate about an event that the delegating object is about to handle or has just handled. 
+When accepting user input from a text field, you need some help from a text field delegate
+
+About Delegates:
+
+	A delegate is an object that acts on behalf of, or in coordination with, another object
+
+	-The delegating object— "the text field" 
+		—keeps a reference for the other object 
+			which is:
+	—the delegate— "the ViewController"
+
+	At the appropriate time, the delegating object sends a message to the delegate
+		The message tells the delegate about an event that the delegating object is about to handle or has just handled. 
+		
 	The delegate may respond by for example: 
 		updating the appearance or state of itself or of other objects in the app
 		or returning a value that affects how an impending event is handled.
+
 
 A text field’s delegate communicates with the text field while its text is being edited, and knows when important events occur
 	—such as when a user starts or stops editing text. 
@@ -62,12 +109,15 @@ Any object can serve as a delegate for another object as long as it conforms to 
 	The protocol that defines a text field’s delegate is called UITextFieldDelegate. 
 		In this case, because ViewController keeps a reference to the text field, you’ll make ViewController the text field’s delegate.
 
-First, you need to have ViewController adopt the UITextFieldDelegate protocol. You adopt a protocol by listing it as part of the class declaration line.
+-------------------------------------------------------------
 
+Set up the UITextFieldDelegate
 
-By adding UITextFieldDelegate protocol to the VC class, the VC class now has the ability to identify itself as a UITextFieldDelegate
+We need the ViewController to adopt the UITextFieldDelegate protocol:
 
-We need to set it as the delegate of the text field and implement some of its behavior to handle the text field's user input
+class ViewController: UIViewController, UITextFieldDelegate
+
+Set VC as the delegate of the text field and implement some of its behavior to handle the text field's user input
 
 In viewDidLoad()
 	Add:
@@ -77,10 +127,13 @@ The "self" refers to the ViewController class, because it’s referenced inside 
 
 NOW the VC is a delegate for nameTextField
 
+-----------------------------------------------
+
+	First Responders
 
 When the user taps a text field, it automatically becomes first responder. 
-	In an app, the first responder is an object that is first on the line for receiving many kinds of app events, 
-		including key events, motion events, and action messages, among others. 
+	the first responder is an object that is first on the line for receiving many kinds of app events, 
+		includes key events, motion events, and action messages, among others. 
 	In other words, many of the events generated by the user are initially routed to the first responder.
 
 When a user wants to finish editing the text field, the text field needs to resign its first-responder status. Because the text field will no longer be the active object in the app, events need to get routed to a more appropriate object.
@@ -102,7 +155,7 @@ func textFieldDidEndEditing(textField: UITextField) {
     myLabel.text = textField.text
 }
 
-----------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
 Work With View Controllers
 
 UIViewController methods get called as follows:
@@ -120,9 +173,9 @@ viewDidAppear()—
 	Because a view’s visibility may be toggled or obscured by other views, this method is always called immediately after the content view appears onscreen.
 
 
-----------------------------------------------------------------------------------
+-------------------------------------------------------------------
 
-Image Views
+Image View Aspect Ratios & Interactions
 
 Pin:
 Select: Aspect Ratio.
@@ -130,10 +183,11 @@ Select: Aspect Ratio.
 		so it will always show a square.
 
 In Atin > Interaction
-	select: User Interaction Enabled checkbox.
-		You’ll need this feature later to let users interact with the image view.
+	select: User Interaction Enabled checkbox
 
 
+
+---------------------
 ******
 Tap gesture recognizer
 
@@ -144,12 +198,12 @@ The Tap Gesture Recognizer appears in the scene dock
 
 To connect the gesture recognizer to the ViewController.swift code
 
-Control-drag from the gesture recognizer in the scene dock to SC
+Control-drag from the gesture recognizer (in the scene dock) to SC
 Connection: Action
 Type: UITapGestureRecognizer
 Name: selectImageFromPhotoLibrary
 
-
+-------------------------------------------------
 Create an Image Picker to Respond to User Taps
 
 An image picker controller manages a UI for taking pictures and for choosing saved images to use in your app.
@@ -214,12 +268,12 @@ func imagePickerController(picker: UIImagePickerController, didFinishPickingMedi
 
 ---------------------------------------------------------------
 ---------------------------------------------------------------
- Implement A Custom Control
+Implement A Custom Control
 
 https://developer.apple.com/library/content/referencelibrary/GettingStarted/DevelopiOSAppsSwift/Lesson5.html#//apple_ref/doc/uid/TP40015214-CH19-SW1
 
 
-Custom UIView
+	Custom UIView
 
 Every UIView subclass that implements an initializer must include an implementation of init?(coder:). The Swift compiler knows this, and offers a fix-it to make this change in your code. Fix-its are provided by the compiler as potential solutions to errors in your code.
 
@@ -235,7 +289,7 @@ class RatingControl: UIView {
 
 Add a new View to SB and add the idin class
 
-Add Buttons to the View (programmatically)
+	Add Buttons to the View (programmatically)
 
 under super.init(coder: aDecoder)
 Add:	
@@ -298,7 +352,7 @@ The enumerate() method returns a collection that contains elements in the rating
 	The frame locations are set equal to a standard button size of 44 points and 5 points of padding, multiplied by index.
 
 
-Implement the Button Action
+	Implement the Button Action
 
 The indexOf(_:) method attempts to find the selected button in the array of buttons and to return the index at which it was found. 
 	This method returns an optional Int because the instance you’re searching for might not exist in the collection you’re searching. 
@@ -328,7 +382,7 @@ https://developer.apple.com/library/content/referencelibrary/GettingStarted/Deve
 
 Test Your Data
 
-Unit Tests
+	Unit Tests
 
 Add yourself:
 First of all just add new Target via 
@@ -342,14 +396,20 @@ Create a Table View
 
 https://developer.apple.com/library/content/referencelibrary/GettingStarted/DevelopiOSAppsSwift/Lesson7.html#//apple_ref/doc/uid/TP40015214-CH8-SW1
 
-In the Attributes inspector, find the field labeled Selection and select None.
-	With this option, the cell won’t get a visual highlight when a user taps it.
+***
+	Turn off Cell highlighting when user taps
 
-In the Attributes inspector, 
-find the field labeled Interaction and 
-deselect the User Interaction Enabled checkbox.
-	You designed your custom rating control class to be interactive, but it doesn’t need to be interactive when it’s displayed in this table view cell. 
-		So it’s important to disable that interaction when it’s in this context.
+Outline > TV > Cell > atin > Selection: None
+
+	Turn off user interaction with cell contents but allow click to segue
+
+Outline > TV > Cell > atin > Interaction > 
+	deselect the User Interaction Enabled checkbox.
+		The custom rating control class set to be interactive, but it doesn’t need to be interactive when it’s displayed in this table view cell. 
+
+---------------------------------
+
+UITableViewDataSource protocol and UITableViewDelegate protocol
 
 Before you can display dynamic data in your table view cells, you need to create outlet connections between the views (objects) in your storyboard and the code that represents the table view cell in MealTableViewCell.swift.
 
@@ -360,6 +420,7 @@ A table view data source, as implied by its name,
 	supplies the table view with the data it needs to display. 
 A table view delegate helps the table view manage cell selection, row heights, and other aspects related to displaying the data. 
 
+**
 By default, UITableViewController and its subclasses adopt the necessary protocols to make the table view controller both a data source (UITableViewDataSource protocol) and a delegate (UITableViewDelegate protocol) for its associated table view. 
 	Your job is to implement the appropriate protocol methods in your table view controller subclass so that your table view has the correct behavior.
 
@@ -399,13 +460,10 @@ Implement Navigation
 https://developer.apple.com/library/content/referencelibrary/GettingStarted/DevelopiOSAppsSwift/Lesson8.html#//apple_ref/doc/uid/TP40015214-CH16-SW1
 
 
-
-Embeded both VCs in Navbars. Is this ideal?
-
-
 Store New Meals in the Meal List
 
-Create an Unwind Segue
+***
+Create an Unwind Segue 1/2
 
 In the prepareForSegue(_:sender:) method, add the following if statement:
 if saveButton === sender {
@@ -456,6 +514,7 @@ On the canvas, Control-drag from the Save button to the Exit item at the top of 
 Choose unwindToMealList: from the shortcut menu.
 Now, when users tap the Save button, they navigate back to the meal list scene, during which process the unwindToMealList(_:) action method is called.
 
+---------------------------------------------
 
 Disable Saving When the User Doesn't Enter an Item Name
 
@@ -487,8 +546,8 @@ In viewDidLoad
 checkValidMealName()
 
 
-
-Cancel a New Meal Addition
+---------------------
+Cancel button - dismissViewController
 
 wire up the cancel button
 add
@@ -526,7 +585,7 @@ This code fetches the Meal object corresponding to the selected cell in the tabl
 
 -------------------------------------------------
 
-To update the implementation of unwindToMealList(_:) to add or replace meals
+Update the implementation of unwindToMealList(_:) to add or replace meals 2/2
 
 
 In MealTableViewController.swift, find the unwindToMealList(_:) method.
@@ -550,7 +609,7 @@ else {
 
 The else clause executes when there’s no selected row in the table view, which means a user tapped the Add button to get to the meal scene. In other words, this else statement gets executed if a new meal is being added.
 
-
+--------------------------------------
 Cancel an Edit to an Existing Meal
 
 In the cancel(_:) action method, before dismissViewControllerAnimated, 
@@ -582,7 +641,7 @@ The else clause gets executed when the meal scene was pushed onto the navigation
 
 -------------------------------------------------------------------------------------------------------------
 
-Support Deleting Meals
+Support Deletion
 
 
 Add Edit button to TV
