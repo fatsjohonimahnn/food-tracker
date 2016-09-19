@@ -420,30 +420,32 @@ A table view data source, as implied by its name,
 	supplies the table view with the data it needs to display. 
 A table view delegate helps the table view manage cell selection, row heights, and other aspects related to displaying the data. 
 
-**
-By default, UITableViewController and its subclasses adopt the necessary protocols to make the table view controller both a data source (UITableViewDataSource protocol) and a delegate (UITableViewDelegate protocol) for its associated table view. 
-	Your job is to implement the appropriate protocol methods in your table view controller subclass so that your table view has the correct behavior.
+*
+By default, UITableViewController and its subclasses adopt:
+	UITableViewDataSource protocol 
+	UITableViewDelegate protocol
 
-A functioning table view requires three table view data source methods.
-
+// Optional
 func numberOfSectionsInTableView(tableView: UITableView) -> Int
 
-func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-
-func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
-
-The first of these is numberOfSectionsInTableView(_:), which tells the table view how many sections to display. 
+	tells table view how many sections to display. 
 	Sections are visual groupings of cells within table views, which is especially useful in table views with a lot of data. 
 		For a simple table view like the one in the FoodTracker app, you just need the table view to display a single section, so the implementation of the numberOfSectionsInTableView(_:) data source method is straightforward.
 
-The next data source method, tableView(_:numberOfRowsInSection:), tells the table view how many rows to display in a given section. 
-	A table view defaults to having a single section, which is just what you need for the FoodTracker app. 
+// Req.
+func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+
+	tells the table view how many rows to display in a given section. 
+	A table view defaults to having a single section 
 		Each meal should have its own row in that section. 
 			That means that the number of rows should be the number of Meal objects in your meals array.
 
 
-The last data source method, tableView(_:cellForRowAtIndexPath:), configures and provides a cell to display for a given row. 
-	Each row in a table view has one cell, and that cell determines the content that appears in that row and how that content is laid out.
+// Req.
+func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+
+	configures and provides a cell to display for a given row. 
+		Each row in a table view has one cell, and that cell determines the content that appears in that row and how that content is laid out.
 
 For table views with a small number of rows, all rows may be onscreen at once, so this method gets called for each row in your table. 
 	But table views with a large number of rows display only a small fraction of their total items at a given time. 
@@ -464,6 +466,8 @@ Store New Meals in the Meal List
 
 ***
 Create an Unwind Segue 1/2
+
+In Meal VC
 
 In the prepareForSegue(_:sender:) method, add the following if statement:
 if saveButton === sender {
