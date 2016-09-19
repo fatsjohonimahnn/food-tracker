@@ -40,17 +40,17 @@ class RatingControl: UIView {
             let button = UIButton()
             
             // empty star image appears when a button is unselected (.Normal state).
-            button.setImage(emptyStarImage, forState: .Normal)
+            button.setImage(emptyStarImage, for: UIControlState())
             //filled-in star image appears when the button is selected (.Selected state)
-            button.setImage(filledStarImage, forState: .Selected)
+            button.setImage(filledStarImage, for: .selected)
             // user in process of tapping the button
-            button.setImage(filledStarImage, forState: [.Highlighted, .Selected])
+            button.setImage(filledStarImage, for: [.highlighted, .selected])
             
             //make sure that the image doesn’t show an additional highlight during the state change
             button.adjustsImageWhenHighlighted = false
             
             // attach the action method to the button obj
-            button.addTarget(self, action: #selector(RatingControl.ratingButtonTapped(_:)), forControlEvents: .TouchDown)
+            button.addTarget(self, action: #selector(RatingControl.ratingButtonTapped(_:)), for: .touchDown)
             
             // As you create each button, you add it to the ratingButtons array to keep track of it.
             ratingButtons += [button]
@@ -72,7 +72,7 @@ class RatingControl: UIView {
         var buttonFrame = CGRect(x: 0, y: 0, width: buttonSize, height: buttonSize)
         
         // Offset each button's origin by the length of the button plus spacing.
-        for (index, button) in ratingButtons.enumerate() {
+        for (index, button) in ratingButtons.enumerated() {
             buttonFrame.origin.x = CGFloat(index * (buttonSize + 5))
             button.frame = buttonFrame
         }
@@ -82,7 +82,7 @@ class RatingControl: UIView {
     }
     
     // tells the stack view how to lay out your button
-    override func intrinsicContentSize() -> CGSize {
+    override var intrinsicContentSize : CGSize {
         
         let buttonSize = Int(frame.size.height)
         let width = (buttonSize * starCount) + (spacing * (starCount - 1))
@@ -92,10 +92,10 @@ class RatingControl: UIView {
     
     // MARK: Button Action
     
-    func ratingButtonTapped(button: UIButton) {
+    func ratingButtonTapped(_ button: UIButton) {
         
         // add 1 rating per button
-        rating = ratingButtons.indexOf(button)! + 1
+        rating = ratingButtons.index(of: button)! + 1
         
         // call to update buttons when button tapped and when view is being layed out (loaded)
         updateButtonSelectionStates()
@@ -106,9 +106,9 @@ class RatingControl: UIView {
         
         //iterate through ratingButtons array to set each buttons state
         //If index < rating is true, button’s state set to selected. Otherwise, the button is unselected and shows the empty star
-        for (index, button) in ratingButtons.enumerate() {
+        for (index, button) in ratingButtons.enumerated() {
             // If the index of a button is less than the rating, that button should be selected.
-            button.selected = index < rating
+            button.isSelected = index < rating
         }
     }
 
