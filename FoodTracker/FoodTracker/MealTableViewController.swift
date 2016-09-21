@@ -13,7 +13,7 @@ class MealTableViewController: UITableViewController {
     // MARK: Properties
     
     var meals = [Meal]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,12 +24,52 @@ class MealTableViewController: UITableViewController {
         if let savedMeals = loadMeals() {
             
             meals += savedMeals
-        
+
         } else {
             // Load the sample data.
             loadSampleMeals()
         }
+        
+        
+        
+// TODO: Test save to BE
+        
+        let meal = BEMeal()
+        meal.name = "Meal Name"
+        meal.photo = "Photo"
+        meal.rating = 5
+        
+        let backendless = Backendless.sharedInstance()!
+        
+        backendless.data.save( meal,
+                               
+                               response: { (entity: Any?) -> Void in
+                                
+                                let meal = entity as! BEMeal
+                                
+                                print("BEMeal was saved: \(meal.objectId!), name: \(meal.name), rating: \"\(meal.rating)\"")
+            },
+                               
+                               error: { (fault: Fault?) -> Void in
+                                print("Comment failed to save: \(fault)")
+            }
+        )
+        
+        
 
+    }
+   
+    func checkIfLoggedIn() -> Bool {
+        
+        let backendless = Backendless.sharedInstance()!
+        
+        let isValidUser = backendless.userService.isValidUserToken()
+        
+        if isValidUser != nil && isValidUser != 0 {
+            return true
+        } else {
+            return false
+        }
     }
     
     func loadSampleMeals() {
@@ -156,14 +196,79 @@ class MealTableViewController: UITableViewController {
     // MARK: NSCoding
     
     func saveMeals() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(meals, toFile: Meal.ArchiveURL.path)
-        if !isSuccessfulSave {
-            print("Failed to save meals...")
+        
+        if checkIfLoggedIn() {
+            
+ //           let backendless = Backendless.sharedInstance()!
+            
+//            let cellIdentifier = "mealTableViewCell"
+//            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! MealTableViewCell
+//
+//            let meal: BEMeal
+//            meal.name = cell.nameLabel.text!
+//            meal.rating = cell.ratingControl.rating
+//            meal.photo = cell.imageView?.description
+//            
+//            backendless.data.save( meal,
+//                                   
+//                                   response: { (entity: Any?) -> Void in
+//                                    
+//                                    let meal = entity as! BEMeal
+//                                    
+//                                    print("BEMeal was saved: \(meal.objectId!), name: \(meal.name), photo: \(meal.photo), rating: \"\(meal.rating)\"")
+//                },
+//                                   
+//                                   error: { (fault: Fault?) -> Void in
+//                                    print("Comment failed to save: \(fault)")
+//                }
+//            )
+            
+        } else {
+            
+            let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(meals, toFile: Meal.ArchiveURL.path)
+            if !isSuccessfulSave {
+                print("Failed to save meals...")
+            }
         }
     }
     
+    // this is unarchiving meals from disk see NSUserDefaults
     func loadMeals() -> [Meal]? {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: Meal.ArchiveURL.path) as? [Meal]
+            
+            
+//            if checkIfLoggedIn() {
+//                
+//                
+//                let backendless = Backendless.sharedInstance()!
+//                let dataStore = backendless.persistenceService.of(BEMeal.ofClass())
+//                
+//                dataStore?.find(
+//                    
+//                    { (beMeals: BackendlessCollection?) -> Void in
+//                        
+//                        print("Find attempt on all Comments has completed without error!")
+//                        print("Number of Comments found = \((beMeals?.data.count)!)")
+//                        
+//                        for meal in (beMeals?.data)! {
+//                            
+//                            let meal = meal as! BEMeal
+//                            
+//                            print("Meal: \(meal.objectId!), rating: \"\(meal.rating)\"")
+//                        }
+//                    },
+//                    
+//                    error: { (fault: Fault?) -> Void in
+//                        print("Comments were not fetched: \(fault)")
+//                    }
+//                )
+//                
+//                
+//                return 
+//                
+//                
+//            } else {
+                return NSKeyedUnarchiver.unarchiveObject(withFile: Meal.ArchiveURL.path) as? [Meal]
+//            }
     }
 
 }

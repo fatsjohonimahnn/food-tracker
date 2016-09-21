@@ -8,6 +8,8 @@
 
 import UIKit
 
+// we would want a separate class for BE meals being saved without persisting data
+
 class Meal: NSObject, NSCoding {
     
     // MARK: Properties

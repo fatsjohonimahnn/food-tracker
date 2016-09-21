@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZMB-hr-CPv">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="O3Z-Nl-MAz">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -154,6 +154,62 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1841" y="738"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="fFv-he-w83">
+            <objects>
+                <viewController id="O3Z-Nl-MAz" customClass="LoginViewController" customModule="FoodTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LvL-PN-cqp"/>
+                        <viewControllerLayoutGuide type="bottom" id="3mR-IF-Xf8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="u8M-Ou-stQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="140" translatesAutoresizingMaskIntoConstraints="NO" id="ITL-QR-dS1">
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9XB-QS-sbp">
+                                        <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="BAk-CS-wsx"/>
+                                            <constraint firstAttribute="width" constant="60" id="O5p-nG-ZXA"/>
+                                        </constraints>
+                                        <state key="normal" title="Login"/>
+                                        <connections>
+                                            <action selector="loginBtn:" destination="O3Z-Nl-MAz" eventType="touchUpInside" id="6ow-fv-qP1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nyU-WX-OJ3">
+                                        <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Log Out"/>
+                                        <connections>
+                                            <action selector="logoutBtn:" destination="O3Z-Nl-MAz" eventType="touchUpInside" id="352-gB-g0u"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3CE-OO-nlc">
+                                        <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Skip"/>
+                                        <connections>
+                                            <action selector="skipBtn:" destination="O3Z-Nl-MAz" eventType="touchUpInside" id="aYs-Na-s4m"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ITL-QR-dS1" firstAttribute="centerX" secondItem="u8M-Ou-stQ" secondAttribute="centerX" id="Jj1-1H-cYO"/>
+                            <constraint firstItem="ITL-QR-dS1" firstAttribute="centerY" secondItem="u8M-Ou-stQ" secondAttribute="centerY" id="tmp-ix-giU"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <segue destination="ZMB-hr-CPv" kind="show" identifier="loginToNav" id="AoU-5g-otX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q08-oS-c0v" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1297" y="393"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1bn-bP-gOg">
