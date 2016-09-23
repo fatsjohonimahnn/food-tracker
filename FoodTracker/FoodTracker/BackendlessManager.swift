@@ -25,8 +25,8 @@ class BackendlessManager {
     
     let backendless = Backendless.sharedInstance()!
     
-    let APP_ID = "673D925F-286E-C27C-FF33-0FEF3CC72300"
-    let SECRET_KEY = "BC27DF26-F708-A43F-FF1C-B0ACDF48BE00"
+    let APP_ID = "<Add-App-ID>"
+    let SECRET_KEY = "<Add-Secret-Key>"
     let VERSION_NUM = "v1"
     
     let EMAIL = "test@gmail.com" // Doubles as User Name
