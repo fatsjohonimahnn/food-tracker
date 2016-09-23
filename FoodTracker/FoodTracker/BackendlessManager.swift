@@ -25,8 +25,8 @@ class BackendlessManager {
     
     let backendless = Backendless.sharedInstance()!
     
-    let APP_ID = "<Add-App-ID>"
-    let SECRET_KEY = "<Add-Secret-Key>"
+    let APP_ID = "673D925F-286E-C27C-FF33-0FEF3CC72300"
+    let SECRET_KEY = "BC27DF26-F708-A43F-FF1C-B0ACDF48BE00"
     let VERSION_NUM = "v1"
     
     let EMAIL = "test@gmail.com" // Doubles as User Name
@@ -166,7 +166,7 @@ class BackendlessManager {
     }
     // MealData is the old class, made some changes
     
-    func saveMeal(mealData: MealData) {
+    func saveMeal(mealData: MealData, completion: @escaping () -> (), error: @escaping () -> ()) {
         
         let mealToSave = Meal()
         mealToSave.name = mealData.name
@@ -189,14 +189,18 @@ class BackendlessManager {
                                 
                                 // this stops from making duplicate records over and over again !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                                 mealData.objectId = meal.objectId
+                                
+                                completion()
             },
                                
                                error: { (fault: Fault?) -> Void in
                                 print("Meal failed to save: \(fault)")
+                                
+                                error()
             }
         )
     }
-    // completion is a closure that when callsed points to an array of MealData
+    // completion is a closure that when called points to an array of MealData
     // job is to load and hand off to someone else, no VC should touch this
     // closure is called not the loadMeals func
     func loadMeals(completion: @escaping ([MealData]) -> ()) {
@@ -248,7 +252,7 @@ class BackendlessManager {
     // removes meal from the database
     // completion argument takes no arguments and returns nothing
     // says the request occured and the DB deletes it and then its removed from the table
-    func removeMeal(mealToRemove: MealData, completion: () -> ()) {
+    func removeMeal(mealToRemove: MealData, completion: () -> (), error: @escaping () -> ()) {
         
         let meal = Meal()
         
@@ -260,17 +264,19 @@ class BackendlessManager {
         
         let dataStore = backendless.persistenceService.of(Meal.ofClass())
         
-        var error: Fault?
-        let result = dataStore?.remove(meal, fault: &error)
+        var fault: Fault?
+        let result = dataStore?.remove(meal, fault: &fault)
         
-        if error == nil {
+        if fault == nil {
             
             print("One Meal has been removed: \(result)")
             
             completion()
             
         } else {
-            print("Server reported an error on attempted removal: \(error)")
+            print("Server reported an error on attempted removal: \(fault)")
+            
+            error()
         }
     }
 }

@@ -76,7 +76,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t2s-Mq-Nh7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="625" y="399"/>
+            <point key="canvasLocation" x="377" y="399"/>
         </scene>
         <!--New Meal-->
         <scene sceneID="tne-QT-ifu">
@@ -118,6 +118,10 @@
                                     <constraint firstItem="bnI-BR-x6x" firstAttribute="leading" secondItem="2DJ-qU-vdp" secondAttribute="leading" id="h7e-ob-El4"/>
                                 </constraints>
                             </stackView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="y21-of-AP0">
+                                <frame key="frameInset" minX="169" minY="315" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -134,7 +138,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="84l-Sz-WVR">
                             <connections>
-                                <segue destination="1gU-GU-msv" kind="unwind" unwindAction="unwindToMealList:" id="UC8-PK-Ibq"/>
+                                <action selector="save:" destination="BYZ-38-t0r" id="Hxy-1Y-PaB"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -143,6 +147,8 @@
                         <outlet property="photoImageView" destination="yis-NB-bST" id="rdh-tC-FUO"/>
                         <outlet property="ratingControl" destination="G82-2O-X5F" id="Amv-qQ-hfc"/>
                         <outlet property="saveButton" destination="84l-Sz-WVR" id="nH9-cb-DzG"/>
+                        <outlet property="saveSpinner" destination="y21-of-AP0" id="DMn-8q-Fc5"/>
+                        <segue destination="1gU-GU-msv" kind="unwind" identifier="unwindToMealList" unwindAction="unwindToMealList:" id="Wfd-WS-DZ0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
