@@ -1,5 +1,5 @@
 //
-//  Meal.swift
+//  MealData.swift
 //  FoodTracker
 //
 //  Created by Jonathon Fishman on 9/15/16.
@@ -8,20 +8,30 @@
 
 import UIKit
 
-class Meal: NSObject, NSCoding {
+// we would want a separate class for BE meals being saved without persisting data
+
+class MealData: NSObject, NSCoding {
     
-    // MARK: Properties
+    // MARK: Common Properties Shared by Archiver and Backendless
     
     var name: String
-    var photo: UIImage?
     var rating: Int
+    
+    // MARK: Archiver Only Properties
+    
+    var photo: UIImage?
+    
+    // MARK: Backendless Only Properties
+    
+    var objectId: String?
+    var photoUrl: String?
     
     // MARK: Archiving Paths
     
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
     static let ArchiveURL = DocumentsDirectory.appendingPathComponent("meals")
     
-    // MARK: Type
+    // MARK: Types
     
     struct PropertyKey {
         

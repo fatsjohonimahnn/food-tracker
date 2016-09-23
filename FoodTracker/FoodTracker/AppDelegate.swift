@@ -10,12 +10,20 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        BackendlessManager.sharedInstance.initApp()
+
+//        if !BackendlessManager.sharedInstance.isUserLoggedIn() {
+//            // only being used becuase we don't have a registration page
+//            BackendlessManager.sharedInstance.registerTestUser()
+//        }
+        
         return true
     }
 
