@@ -1,5 +1,5 @@
 //
-//  BEMeal.swift
+//  Meal.swift
 //  FoodTracker
 //
 //  Created by Jonathon Fishman on 9/21/16.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-class BEMeal: NSObject {
+class Meal: NSObject {
     
     // MARK: Properties
     
     var objectId: String?
     var name: String?
-    var photo: String?
+    var photoUrl: String?
     var rating: Int = 0
 }

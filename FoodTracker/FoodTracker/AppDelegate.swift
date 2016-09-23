@@ -10,11 +10,6 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    let APP_ID = "673D925F-286E-C27C-FF33-0FEF3CC72300"
-    let SECRET_KEY = "BC27DF26-F708-A43F-FF1C-B0ACDF48BE00"
-    let VERSION_NUM = "v1"
-    
     
     var window: UIWindow?
 
@@ -22,14 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        if APP_ID != "<replace-with-your-app-id>" && SECRET_KEY != "<replace-with-your-secret-key>" {
-            
-            let backendless = Backendless.sharedInstance()
-            backendless?.initApp(APP_ID, secret:SECRET_KEY, version:VERSION_NUM)
-            backendless?.userService.setStayLoggedIn(true)
-            // If you plan to use Backendless Media Service, uncomment the following line (iOS ONLY!)
-            // backendless.mediaService = MediaService()
-        }
+        BackendlessManager.sharedInstance.initApp()
+
+//        if !BackendlessManager.sharedInstance.isUserLoggedIn() {
+//            // only being used becuase we don't have a registration page
+//            BackendlessManager.sharedInstance.registerTestUser()
+//        }
         
         return true
     }
