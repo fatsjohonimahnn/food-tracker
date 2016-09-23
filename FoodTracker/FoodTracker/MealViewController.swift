@@ -124,6 +124,9 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
 // TODO: Fix
         let photoUrl = "https://guildsa.org/wp-content/uploads/2016/09/meal1.png"
         
+        // enable the save button
+        saveButton.isEnabled = true
+        
         // Set the meal to be passed to MealTableViewController after the unwind segue.
         if meal == nil {
             
@@ -140,6 +143,9 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         }
         
         if BackendlessManager.sharedInstance.isUserLoggedIn() {
+            
+            // turn off save button when pressed once
+            self.saveButton.isEnabled = false
             
             // We're logged in - attempt to save to Backendless!
             saveSpinner.startAnimating()
