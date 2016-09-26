@@ -26,6 +26,13 @@ class MealData: NSObject, NSCoding {
     var objectId: String?
     var photoUrl: String?
     
+    // thumbnail photo
+    var thumbnailUrl: String?
+    
+    // used as a book marking place for later func 
+    var replacePhoto: Bool = false
+    
+    
     // MARK: Archiving Paths
     
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!

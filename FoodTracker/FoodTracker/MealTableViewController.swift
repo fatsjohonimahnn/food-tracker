@@ -28,6 +28,7 @@ class MealTableViewController: UITableViewController {
                 
                 self.meals += mealData
                 self.tableView.reloadData()
+
             }
             
         } else {
@@ -39,8 +40,7 @@ class MealTableViewController: UITableViewController {
             } else {
                 // Load the sample data.
                 
-// HACK: Disabled sample meal data for now!
-//loadSampleMeals()
+                loadSampleMeals()
             }
         }
     }
@@ -88,9 +88,10 @@ class MealTableViewController: UITableViewController {
         cell.nameLabel.text = meal.name
         //cell.photoImageView.image = meal.photo
         cell.ratingControl.rating = meal.rating
-        
-        if BackendlessManager.sharedInstance.isUserLoggedIn() && meal.photoUrl != nil {
-            loadImageFromUrl(cell: cell, photoUrl: meal.photoUrl!)
+
+// Added thumbnailUrl
+        if BackendlessManager.sharedInstance.isUserLoggedIn() && meal.thumbnailUrl != nil {
+            loadImageFromUrl(cell: cell, thumbnailUrl: meal.thumbnailUrl!)
         } else {
             cell.photoImageView.image = meal.photo
         }
@@ -98,9 +99,10 @@ class MealTableViewController: UITableViewController {
         return cell
     }
     
-    func loadImageFromUrl(cell: MealTableViewCell, photoUrl: String) {
+// Added thumbnailUrl
+    func loadImageFromUrl(cell: MealTableViewCell, thumbnailUrl: String) {
         
-        let url = URL(string: photoUrl)!
+        let url = URL(string: thumbnailUrl )!
         
         let session = URLSession.shared
         

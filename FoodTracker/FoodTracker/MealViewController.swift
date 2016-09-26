@@ -98,6 +98,12 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         // The info dictionary contains multiple representations of the image, and this uses the original.
         let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         
+        // If we already have a URL for an image - the user wants to do an image replacement.
+        if meal?.photoUrl != nil {
+            // book keeping variable for keeping track of user changing the picture
+            meal?.replacePhoto = true
+        }
+        
         // Set photoImageView to display the selected image.
         photoImageView.image = selectedImage
         
@@ -114,38 +120,31 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        
 //        if saveButton === sender as! UIBarButtonItem {
-    
+    // rewritten from perform segue
     @IBAction func save(_ sender: UIBarButtonItem) {
+        
+        // turn off save button when pressed once
+        self.saveButton.isEnabled = false
         
         let name = nameTextField.text ?? ""
         let photo = photoImageView.image
         let rating = ratingControl.rating
         
 // TODO: Fix
-        let photoUrl = "https://guildsa.org/wp-content/uploads/2016/09/meal1.png"
+//        let photoUrl = "https://guildsa.org/wp-content/uploads/2016/09/meal1.png"
         
-        // enable the save button
-        saveButton.isEnabled = true
-        
-        // Set the meal to be passed to MealTableViewController after the unwind segue.
         if meal == nil {
             
             meal = MealData(name: name, photo: photo, rating: rating)
-            
-            meal?.photoUrl = photoUrl
             
         } else {
             
             meal?.name = name
             meal?.photo = photo
             meal?.rating = rating
-            meal?.photoUrl = photoUrl
         }
         
         if BackendlessManager.sharedInstance.isUserLoggedIn() {
-            
-            // turn off save button when pressed once
-            self.saveButton.isEnabled = false
             
             // We're logged in - attempt to save to Backendless!
             saveSpinner.startAnimating()
@@ -154,35 +153,39 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
                                                        
                                                        completion: {
                                                         
-                                                        // It has saved to the DB
+                                                        // It was saved to the database!
                                                         self.saveSpinner.stopAnimating()
                                                         
+                                                        
+                                                        self.meal?.replacePhoto = false // Reset this just in case we did a photo replacement.
+                                                        
                                                         self.performSegue(withIdentifier: "unwindToMealList", sender: self)
-            },
+                },
                                                        
                                                        error: {
                                                         
-                                                        // It was NOT saved to the DB - tell user and DON'T call performSegue.
+                                                        // It was NOT saved to the database! - tell the user and DON'T call performSegue.
                                                         self.saveSpinner.stopAnimating()
                                                         
                                                         let alertController = UIAlertController(title: "Save Error",
-                                                            message: "Oops! We Couldn't save your Meal at this time. Please try again.",
-                                                            preferredStyle: .alert)
+                                                                                                message: "Oops! We couldn't save your Meal at this time.",
+                                                                                                preferredStyle: .alert)
                                                         
                                                         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                                                         alertController.addAction(okAction)
                                                         
                                                         self.present(alertController, animated: true, completion: nil)
-            }
-            )
+                                                        
+                                                        self.saveButton.isEnabled = true
+            })
+            
         } else {
             
-            // We're not logged in - just unwind and have MealTableViewController
-            // save later using NSKeyedArchiver
+            // We're not logged in - just unwind and have MealTableViewController 
+            // save later using NSKeyedArchiver.
             self.performSegue(withIdentifier: "unwindToMealList", sender: self)
         }
     }
-
 
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         
