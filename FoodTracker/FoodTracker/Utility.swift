@@ -1,0 +1,35 @@
+//
+//  Utility.swift
+//  FoodTracker
+//
+//  Created by Jonathon Fishman on 9/27/16.
+//  Copyright © 2016 GoYoJo. All rights reserved.
+//
+
+import Foundation
+
+class Utility {
+    
+    // This gives access to the one and only instance.
+    static let sharedInstance = Utility()
+    
+    // This prevents others from using the default '()' initializer for this class.
+    private init() {}
+    
+    static func isValidEmail(emailAddress: String) -> Bool {
+        
+        // use of regular expression to make sure emails are formatted correctly
+        let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
+        return emailPredicate.evaluate(with: emailAddress)
+    }
+    
+    static func showAlert(viewController: UIViewController, title: String, message: String) {
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        viewController.present(alertController, animated: true, completion: nil)
+    }
+    
+}
