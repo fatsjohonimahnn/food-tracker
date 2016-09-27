@@ -65,7 +65,7 @@ class MealTableViewController: UITableViewController {
     }
 
     
-    // MARK: - Table view data source
+    // MARK: TableView Data Source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
 
@@ -89,7 +89,7 @@ class MealTableViewController: UITableViewController {
         //cell.photoImageView.image = meal.photo
         cell.ratingControl.rating = meal.rating
 
-// Added thumbnailUrl
+        // Added thumbnailUrl
         if BackendlessManager.sharedInstance.isUserLoggedIn() && meal.thumbnailUrl != nil {
             loadImageFromUrl(cell: cell, thumbnailUrl: meal.thumbnailUrl!)
         } else {
@@ -99,7 +99,7 @@ class MealTableViewController: UITableViewController {
         return cell
     }
     
-// Added thumbnailUrl
+    // Added thumbnailUrl
     func loadImageFromUrl(cell: MealTableViewCell, thumbnailUrl: String) {
         
         let url = URL(string: thumbnailUrl )!
@@ -153,23 +153,24 @@ class MealTableViewController: UITableViewController {
                 
                 BackendlessManager.sharedInstance.removeMeal(mealToRemove: mealToRemove,
                                                              
-                                                             completion: {
+                    completion: {
                                                                 
-                                                                // If it was removed from the database, now delete the row from the data source
-                                                                self.meals.remove(at: (indexPath as NSIndexPath).row)
-                                                                tableView.deleteRows(at: [indexPath], with: .fade)
+                        // If it was removed from the database, now delete the row from the data source
+                        self.meals.remove(at: (indexPath as NSIndexPath).row)
+                        tableView.deleteRows(at: [indexPath], with: .fade)
                     },
-                                                             error: {
+                    
+                    error: {
                                                                 
-                                                                // It was NOT removed - tell user and DON'T delete the row from data source
-                                                                let alertController = UIAlertController(title: "Remove Failed",
-                                                                                                        message: "Oops! We couldn't remove your Meal at this time.",
-                                                                                                        preferredStyle: .alert)
+                        // It was NOT removed - tell user and DON'T delete the row from data source
+                        let alertController = UIAlertController(title: "Remove Failed",
+                                    message: "Oops! We couldn't remove your Meal at this time.",
+                                    preferredStyle: .alert)
+                        
+                        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                        alertController.addAction(okAction)
                                                                 
-                                                                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                                                                alertController.addAction(okAction)
-                                                                
-                                                                self.present(alertController, animated: true, completion: nil)
+                        self.present(alertController, animated: true, completion: nil)
                     }
                     
                 )
@@ -178,7 +179,7 @@ class MealTableViewController: UITableViewController {
                 // Delete the row from the data source
                 meals.remove(at: indexPath.row)
                 
-                // Save the meals.
+                // Save the archivers meals array when deleted
                 saveMealsToArchiver()
                 
                 tableView.deleteRows(at: [indexPath], with: .fade)
@@ -186,9 +187,7 @@ class MealTableViewController: UITableViewController {
             
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-            
         }
-        
     }
     
 
@@ -238,7 +237,7 @@ class MealTableViewController: UITableViewController {
             }
             
             if !BackendlessManager.sharedInstance.isUserLoggedIn() {
-                // Save the meals.
+                // Save the meals to archiver
                 saveMealsToArchiver()
             }
         }

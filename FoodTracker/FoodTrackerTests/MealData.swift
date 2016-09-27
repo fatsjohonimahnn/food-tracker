@@ -42,6 +42,7 @@ class MealData: NSObject, NSCoding {
     
     struct PropertyKey {
         
+        // static keyword indicates that this constant applies to the structure itself, not an instance of the structure. These values will never change.
         static let nameKey = "name"
         static let photoKey = "photo"
         static let ratingKey = "rating"
@@ -55,6 +56,7 @@ class MealData: NSObject, NSCoding {
         self.photo = photo
         self.rating = rating
         
+        // optional bc NSObject has very generic init
         super.init()
         
         // Initialization should fail if there is no name or if the rating is negative.
@@ -81,7 +83,7 @@ class MealData: NSObject, NSCoding {
     required convenience init?(coder aDecoder: NSCoder) {
         let name = aDecoder.decodeObject(forKey: PropertyKey.nameKey) as! String
         
-        // Because photo is an optional property of Meal, use conditional cast.
+        // Because photo is an optional property of MealData, use conditional cast.
         let photo = aDecoder.decodeObject(forKey: PropertyKey.photoKey) as? UIImage
         
         let rating = aDecoder.decodeInteger(forKey: PropertyKey.ratingKey)

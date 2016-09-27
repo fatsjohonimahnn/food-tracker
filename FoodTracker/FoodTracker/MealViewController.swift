@@ -10,6 +10,8 @@ import UIKit
 
 class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    
+    
     // MARK: Properties
     
     @IBOutlet weak var nameTextField: UITextField!
@@ -53,9 +55,13 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
+    
+    
     // MARK: UITextFieldDelegate
     
-    // optional but helpful
+    // UITextFieldDelegate, called when Return tapped on keyboard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Hide the keyboard.
         textField.resignFirstResponder()
@@ -63,37 +69,41 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         return true
     }
     
-    // method gets called when an editing session begins, or when the keyboard gets displayed.
-    // This code disables the Save button while the user is editing the text field.
+    // UITextFieldDelegate, called when editing session begins, or when keyboard displayed
     func textFieldDidBeginEditing(_ textField: UITextField) {
         // Disable the Save button while editing.
         saveButton.isEnabled = false
     }
     
-    //  helper method to disable the Save button if the text field is empty.
+    //  helper method to disable Save button if the text field is empty.
     func checkValidMealName() {
-        // Disable the Save button if the text field is empty.
         let text = nameTextField.text ?? ""
         saveButton.isEnabled = !text.isEmpty
     }
     
-    // first line calls checkValidMealName() to check if the text field has text in it, which enables the Save button if it does. 
-    // The second line sets the title of the scene to that text.
+    // UITextFieldDelegate, called after textfield resigns first responder
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
+        // helper method to check if text field has text, enables save button if so
         checkValidMealName()
+        // sets title of scene to textfield
         navigationItem.title = textField.text
-        
     }
+    
+    
+    
     
     // MARK: UIImagePickerControllerDelegate
     
+    
+    // From UIImagePickerControllerDelegate called when image picker’s Cancel button tapped
+    // opportunity to dismiss the UIImagePickerController
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        
         // Dismiss the picker if the user canceled.
         dismiss(animated: true, completion: nil)
     }
     
+    // From UIImagePickerControllerDelegate called when photo selected
+    // opportunity to do something with image ex: display in UI
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         // The info dictionary contains multiple representations of the image, and this uses the original.
         let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
@@ -113,6 +123,7 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     
     
     
+    
     // MARK: Navigation
     
 //    // Remove to allow saving of meal before we head back to the table view
@@ -120,6 +131,7 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        
 //        if saveButton === sender as! UIBarButtonItem {
+    
     // rewritten from perform segue
     @IBAction func save(_ sender: UIBarButtonItem) {
         
@@ -130,9 +142,7 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         let photo = photoImageView.image
         let rating = ratingControl.rating
         
-// TODO: Fix
-//        let photoUrl = "https://guildsa.org/wp-content/uploads/2016/09/meal1.png"
-        
+        // configures meal property with appropriate values before segue executes
         if meal == nil {
             
             meal = MealData(name: name, photo: photo, rating: rating)
@@ -151,32 +161,30 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
             
             BackendlessManager.sharedInstance.saveMeal(mealData: meal!,
                                                        
-                                                       completion: {
+                completion: {
                                                         
-                                                        // It was saved to the database!
-                                                        self.saveSpinner.stopAnimating()
+                    // It was saved to the database!
+                    self.saveSpinner.stopAnimating()
                                                         
                                                         
-                                                        self.meal?.replacePhoto = false // Reset this just in case we did a photo replacement.
-                                                        
-                                                        self.performSegue(withIdentifier: "unwindToMealList", sender: self)
+                    self.meal?.replacePhoto = false // Reset this just in case we did a photo replacement.
+                   self.performSegue(withIdentifier: "unwindToMealList", sender: self)
                 },
                                                        
-                                                       error: {
+                error: {
                                                         
-                                                        // It was NOT saved to the database! - tell the user and DON'T call performSegue.
-                                                        self.saveSpinner.stopAnimating()
+                // It was NOT saved to the database! - tell the user and DON'T call performSegue.
+                self.saveSpinner.stopAnimating()
                                                         
-                                                        let alertController = UIAlertController(title: "Save Error",
-                                                                                                message: "Oops! We couldn't save your Meal at this time.",
-                                                                                                preferredStyle: .alert)
-                                                        
-                                                        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                                                        alertController.addAction(okAction)
-                                                        
-                                                        self.present(alertController, animated: true, completion: nil)
-                                                        
-                                                        self.saveButton.isEnabled = true
+                let alertController = UIAlertController(title: "Save Error",
+                            message: "Oops! We couldn't save your Meal at this time.",
+                            preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    
+                    alertController.addAction(okAction)
+                    
+                    self.present(alertController, animated: true, completion: nil)
+                    self.saveButton.isEnabled = true
             })
             
         } else {
@@ -209,7 +217,7 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         // Hide the keyboard.
         nameTextField.resignFirstResponder()
         
-        // UIImagePickerController is a view controller that lets a user pick media from their photo library.
+        // UIImagePickerController is a VC that lets a user pick media from their photo library
         let imagePickerController = UIImagePickerController()
         
         // Only allow photos to be picked, not taken.
