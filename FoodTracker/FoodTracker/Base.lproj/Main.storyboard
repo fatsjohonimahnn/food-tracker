@@ -42,6 +42,10 @@
                                                 <constraint firstAttribute="height" constant="44" id="Wfb-oy-Wp3"/>
                                             </constraints>
                                         </view>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Ovm-Tu-iYh">
+                                            <frame key="frameInset" minX="27" minY="29" width="37" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </activityIndicatorView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="WPr-yi-vHT" firstAttribute="top" secondItem="M5l-Ps-7ah" secondAttribute="top" id="BG1-Ol-Uyg"/>
@@ -159,7 +163,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1841" y="738"/>
+            <point key="canvasLocation" x="1950" y="399"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="fFv-he-w83">
@@ -194,13 +198,13 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9XB-QS-sbp">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9XB-QS-sbp">
                                         <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="BAk-CS-wsx"/>
-                                            <constraint firstAttribute="width" constant="160" id="O5p-nG-ZXA"/>
+                                            <constraint firstAttribute="width" constant="60" id="O5p-nG-ZXA"/>
                                         </constraints>
                                         <state key="normal" title="Login"/>
                                         <connections>
@@ -210,7 +214,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8qE-fv-C68">
                                         <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="160" id="cEg-EC-KYr"/>
+                                            <constraint firstAttribute="width" constant="130" id="cEg-EC-KYr"/>
                                             <constraint firstAttribute="height" constant="30" id="eFI-b3-kvx"/>
                                         </constraints>
                                         <state key="normal" title="Create Account"/>
@@ -222,7 +226,7 @@
                                         <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Klw-OK-Mlx"/>
-                                            <constraint firstAttribute="width" constant="160" id="dA0-vv-lw8"/>
+                                            <constraint firstAttribute="width" constant="90" id="dA0-vv-lw8"/>
                                         </constraints>
                                         <state key="normal" title="Log Out"/>
                                         <connections>
@@ -232,7 +236,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3CE-OO-nlc">
                                         <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="160" id="Q03-fC-IKv"/>
+                                            <constraint firstAttribute="width" constant="60" id="Q03-fC-IKv"/>
                                             <constraint firstAttribute="height" constant="30" id="wg5-zK-I5k"/>
                                         </constraints>
                                         <state key="normal" title="Skip"/>
@@ -243,7 +247,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.29761350939999998" green="0.71052808089999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ITL-QR-dS1" firstAttribute="centerX" secondItem="u8M-Ou-stQ" secondAttribute="centerX" id="Jj1-1H-cYO"/>
                             <constraint firstItem="ITL-QR-dS1" firstAttribute="centerY" secondItem="u8M-Ou-stQ" secondAttribute="centerY" id="tmp-ix-giU"/>
@@ -260,7 +264,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q08-oS-c0v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1852" y="398.95052473763121"/>
+            <point key="canvasLocation" x="-1210" y="18"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1bn-bP-gOg">
@@ -303,7 +307,7 @@
                                     <action selector="cancel:" destination="Rog-3K-Mqo" eventType="touchUpInside" id="nzZ-YV-3Jf"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Ab9-pM-BCk">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Ab9-pM-BCk">
                                 <color key="color" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="anf-EM-Qhy">
@@ -344,7 +348,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="H1r-IF-Zvu" firstAttribute="top" secondItem="fpF-wY-njw" secondAttribute="bottom" constant="8" id="148-gQ-ADA"/>
                             <constraint firstItem="Avm-cd-JAb" firstAttribute="centerX" secondItem="1Dr-b7-a44" secondAttribute="centerX" id="3TB-i6-x9M"/>
@@ -371,7 +375,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WvY-0y-hIC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1210" y="1163"/>
+            <point key="canvasLocation" x="-1210" y="847"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SYU-c7-X4m">
@@ -389,7 +393,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wm3-wv-cMk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="625" y="1215"/>
+            <point key="canvasLocation" x="1170" y="793"/>
         </scene>
     </scenes>
     <resources>

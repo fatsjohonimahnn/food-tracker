@@ -18,9 +18,10 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
-        
+        // use below helper method here to give textFields ability to check for input
+        emailTextField.addTarget(self, action: #selector(LoginViewController.textFieldChanged(textField:)), for: UIControlEvents.editingChanged)
+        passwordTextField.addTarget(self, action: #selector(LoginViewController.textFieldChanged(textField:)), for: UIControlEvents.editingChanged)
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,29 +29,64 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func loginBtn(_ sender: UIButton) {
+    // helper method checks textFields for input, if so enables loginBtn
+    func textFieldChanged(textField: UITextField) {
         
-        // First, check if the user is already logged in. If they are, we don't need to
-        // ask them to login again.
-        
-        if !BackendlessManager.sharedInstance.isUserLoggedIn() {
-            // only being used becuase we don't have a registration page
-            BackendlessManager.sharedInstance.registerTestUser()
-            performSegue(withIdentifier: "loginToNav", sender: sender)
+        if emailTextField.text == "" || passwordTextField.text == "" {
+            loginBtn.isEnabled = false
         } else {
-            performSegue(withIdentifier: "loginToNav", sender: sender)
+            loginBtn.isEnabled = true
         }
     }
-    @IBAction func createAccountBtn(_ sender: UIButton) {
+    
+    @IBAction func loginBtn(_ sender: UIButton) {
+        
+        if !Utility.isValidEmail(emailAddress: emailTextField.text!) {
+            Utility.showAlert(viewController: self, title: "Login Error", message: "Please enter a valid email address.")
+            return
+        }
+        
+        spinner.startAnimating()
+        
+        let email = emailTextField.text!
+        let password = passwordTextField.text!
+        
+        BackendlessManager.sharedInstance.loginUser(email: email, password: password, completion: {
+            
+                self.spinner.stopAnimating()
+            
+                self.performSegue(withIdentifier: "loginToNav", sender: sender)
+            },
+                
+                error: { message in
+                    
+                    self.spinner.stopAnimating()
+                    
+                    Utility.showAlert(viewController: self, title: "Login Errors", message: message)
+            })
     }
     
+    @IBAction func createAccountBtn(_ sender: UIButton) {
+        performSegue(withIdentifier: "loginToRegister", sender: sender)
+    }
+    
+// TODO: move this
     @IBAction func logoutBtn(_ sender: UIButton) {
         
-        BackendlessManager.sharedInstance.logoutTestUser()
+        
+        BackendlessManager.sharedInstance.logoutUser(completion: {
+            
+            self.spinner.stopAnimating()
+            
+            // chance to add code to segue back when we move this button
+            
+                },
+                                                     
+            error: { message in
+            
+            Utility.showAlert(viewController: self, title: "Logout Error", message: message)
+        })
     }
-
-    
-
 
     @IBAction func skipBtn(_ sender: UIButton) {
         self.performSegue(withIdentifier: "loginToNav", sender: sender)

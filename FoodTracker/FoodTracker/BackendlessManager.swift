@@ -25,19 +25,15 @@ class BackendlessManager {
     
     let backendless = Backendless.sharedInstance()!
     
-    let APP_ID = "<App-ID>"
+    let APP_ID = "<App-id>"
     let SECRET_KEY = "<App-secret-key>"
     let VERSION_NUM = "v1"
-    
-    let EMAIL = "test@gmail.com" // Doubles as User Name
-    let PASSWORD = "password"
     
     func initApp() {
         
         // First, init Backendless! called in AppDelegate
         backendless.initApp(APP_ID, secret:SECRET_KEY, version:VERSION_NUM)
         backendless.userService.setStayLoggedIn(true)
-        
     }
     
     func isUserLoggedIn() -> Bool {
@@ -51,119 +47,111 @@ class BackendlessManager {
         }
     }
     
-    func registerTestUser() {
+    func registerUser(email: String, password: String, completion: @escaping () -> (), error: @escaping (String) -> ()) {
         
         let user: BackendlessUser = BackendlessUser()
-        user.email = EMAIL as NSString!
-        user.password = PASSWORD as NSString!
+        user.email = email as NSString!
+        user.password = password as NSString!
         
         backendless.userService.registering( user,
-                                             
+            
             response: { (user: BackendlessUser?) -> Void in
-                                                
                 print("User was registered: \(user?.objectId)")
-                                                
-                self.loginTestUser()
+                completion()
             },
-                                             
+            
             error: { (fault: Fault?) -> Void in
                 print("User failed to register: \(fault)")
-                                                
-                print(fault?.faultCode)
-                                                
-                // If fault is for "User already exists." - go ahead and just login!
-                if fault?.faultCode == "3033" {
-                    self.loginTestUser()
-                }
+                error((fault?.message)!)
             }
         )
     }
     
-    func loginTestUser() {
+    func loginUser(email: String, password: String, completion: @escaping () -> (), error: @escaping (String) -> ()) {
         
-        backendless.userService.login( self.EMAIL, password: self.PASSWORD,
-                                       
+        backendless.userService.login( email, password: password,
+        
             response: { (user: BackendlessUser?) -> Void in
                 print("User logged in: \(user!.objectId)")
+                completion()
             },
-                                       
+            
             error: { (fault: Fault?) -> Void in
                 print("User failed to login: \(fault)")
-            }
-        )
+                error((fault?.message)!)
+        })
     }
     
-    func logoutTestUser() {
+    func logoutUser(completion: @escaping () -> (), error: @escaping (String) -> ()) {
         
-        let isValidUser = backendless.userService.isValidUserToken()
-        
-        if isValidUser != nil && isValidUser != 0 {
+        // First, check if user is actually logged in
+        if isUserLoggedIn() {
             
-            // if logged in, go ahead and log them out
-            
+            // If they are currently logged in - go ahead and log the out
             backendless.userService.logout( { (user: Any!) -> Void in
-                print("User logged out!")
+                    print("User logged out!")
+                    completion()
                 },
-                    error: { (fault: Fault?) -> Void in
-                        print("User failed to log out: \(fault)")
-                    }
-            )
+                                            
+                error: { (fault: Fault?) -> Void in
+                    print("User failed to log out: \(fault)")
+                    error((fault?.message)!)
+                })
+            
         } else {
             
-            // If we were unable to find a valid user token, the user is already logged out
-            print("User is already logged out: \(isValidUser?.boolValue)");
+            print("User is already logged out!");
+            completion()
         }
     }
     
+//    func saveTestData() {
+//        
+//        let newMeal = Meal()
+//        newMeal.name = "Test Meal #1"
+//        newMeal.photoUrl = "https://guildsa.org/wp-content/uploads/2016/09/meal1.png"
+//        newMeal.rating = 5
+//        
+//        backendless.data.save( newMeal,
+//                               
+//            response: { (entity: Any?) -> Void in
+//                                
+//                let meal = entity as! Meal
+//                                
+//                print("Meal: \(meal.objectId!), name: \(meal.name), photoUrl: \"\(meal.photoUrl!)\", rating: \"\(meal.rating)\"")
+//            },
+//                               
+//            error: { (fault: Fault?) -> Void in
+//                print("Meal failed to save: \(fault)")
+//            }
+//        )
+//    }
+//    
+//    func loadTestData() {
+//        
+//        let dataStore = backendless.persistenceService.of(Meal.ofClass())
+//        
+//        dataStore?.find(
+//            
+//            { (meals: BackendlessCollection?) -> Void in
+//                
+//                print("Find attempt on all Meals has completed without error!")
+//                print("Number of Meals found = \((meals?.data.count)!)")
+//                
+//                for meal in (meals?.data)! {
+//                    
+//                    let meal = meal as! Meal
+//                    
+//                    print("Meal: \(meal.objectId!), name: \(meal.name), photoUrl: \"\(meal.photoUrl!)\", rating: \"\(meal.rating)\"")
+//                }
+//            },
+//            
+//            error: { (fault: Fault?) -> Void in
+//                print("Meals were not fetched: \(fault)")
+//            }
+//        )
+//    }
     
-    func saveTestData() {
-        
-        let newMeal = Meal()
-        newMeal.name = "Test Meal #1"
-        newMeal.photoUrl = "https://guildsa.org/wp-content/uploads/2016/09/meal1.png"
-        newMeal.rating = 5
-        
-        backendless.data.save( newMeal,
-                               
-            response: { (entity: Any?) -> Void in
-                                
-                let meal = entity as! Meal
-                                
-                print("Meal: \(meal.objectId!), name: \(meal.name), photoUrl: \"\(meal.photoUrl!)\", rating: \"\(meal.rating)\"")
-            },
-                               
-            error: { (fault: Fault?) -> Void in
-                print("Meal failed to save: \(fault)")
-            }
-        )
-    }
-    
-    func loadTestData() {
-        
-        let dataStore = backendless.persistenceService.of(Meal.ofClass())
-        
-        dataStore?.find(
-            
-            { (meals: BackendlessCollection?) -> Void in
-                
-                print("Find attempt on all Meals has completed without error!")
-                print("Number of Meals found = \((meals?.data.count)!)")
-                
-                for meal in (meals?.data)! {
-                    
-                    let meal = meal as! Meal
-                    
-                    print("Meal: \(meal.objectId!), name: \(meal.name), photoUrl: \"\(meal.photoUrl!)\", rating: \"\(meal.rating)\"")
-                }
-            },
-            
-            error: { (fault: Fault?) -> Void in
-                print("Meals were not fetched: \(fault)")
-            }
-        )
-    }
-    
-    // Adding ability to save the photo and a thumbnail of same photo 
     func savePhotoAndThumbnail(mealToSave: Meal, photo: UIImage, completion: @escaping () -> (), error: @escaping () -> ()) {
         
         //
@@ -173,6 +161,7 @@ class BackendlessManager {
         let uuid = NSUUID().uuidString
         //print("\(uuid)")
         
+        // create the thumbnail
         let size = photo.size.applying(CGAffineTransform(scaleX: 0.5, y: 0.5))
         let hasAlpha = false
         let scale: CGFloat = 0.1
@@ -414,43 +403,44 @@ class BackendlessManager {
         
         dataStore?.find( dataQuery,
                          
-                         response: { (meals: BackendlessCollection?) -> Void in
-                            
-                            print("Find attempt on all Meals has completed without error!")
-                            print("Number of Meals found = \((meals?.data.count)!)")
-                            
-                            var mealData = [MealData]()
-                            
-                            for meal in (meals?.data)! {
-                                
-                                
-                                // checks every meal, to collect every instance of a meal in BE, we create the meal, photo set to nil for now
-                                let meal = meal as! Meal
-                                
-                                print("Meal: \(meal.objectId!), name: \(meal.name), photoUrl: \"\(meal.photoUrl)\", rating: \"\(meal.rating)\"")
-                                
-                                let newMealData = MealData(name: meal.name!, photo: nil, rating: meal.rating)
-                                
-                                if let newMealData = newMealData {
-                                    
-                                    newMealData.objectId = meal.objectId
-                                    newMealData.photoUrl = meal.photoUrl
-                                    newMealData.thumbnailUrl = meal.thumbnailUrl
-                                    
-                                    // append the meals to the data array
-                                    mealData.append(newMealData)
-                                }
-                            }
-                            
-                            // Whatever meals we found on the database - return them.
-                            completion(mealData)
+             response: { (meals: BackendlessCollection?) -> Void in
+                
+                print("Find attempt on all Meals has completed without error!")
+                print("Number of Meals found = \((meals?.data.count)!)")
+                
+                var mealData = [MealData]()
+                
+                for meal in (meals?.data)! {
+                    
+                    
+                    // checks every meal, to collect every instance of a meal in BE, we create the meal, photo set to nil for now
+                    let meal = meal as! Meal
+                    
+                    print("Meal: \(meal.objectId!), name: \(meal.name), photoUrl: \"\(meal.photoUrl)\", rating: \"\(meal.rating)\"")
+                    
+                    let newMealData = MealData(name: meal.name!, photo: nil, rating: meal.rating)
+                    
+                    if let newMealData = newMealData {
+                        
+                        newMealData.objectId = meal.objectId
+                        newMealData.photoUrl = meal.photoUrl
+                        newMealData.thumbnailUrl = meal.thumbnailUrl
+                        
+                        // append the meals to the data array
+                        mealData.append(newMealData)
+                    }
+                }
+                
+                // Whatever meals we found on the database - return them.
+                completion(mealData)
             },
                          
-                         error: { (fault: Fault?) -> Void in
-                            print("Meals were not fetched: \(fault)")
+            error: { (fault: Fault?) -> Void in
+                print("Meals were not fetched: \(fault)")
             }
         )
     }
+    
     // removes meal from the database
     // completion argument takes no arguments and returns nothing
     // says the request occured and the DB deletes it and then its removed from the table
@@ -462,52 +452,52 @@ class BackendlessManager {
         
         _ = dataStore?.removeID(mealToRemove.objectId,
                                 
-                                response: { (result: NSNumber?) -> Void in
-                                    
-                                    print("One Meal has been removed: \(result)")
-                                    completion()
+            response: { (result: NSNumber?) -> Void in
+                
+                print("One Meal has been removed: \(result)")
+                completion()
             },
                                 
-                                error: { (fault: Fault?) -> Void in
-                                    print("Failed to remove Meal: \(fault)")
-                                    error()
+            error: { (fault: Fault?) -> Void in
+                print("Failed to remove Meal: \(fault)")
+                error()
             }
         )
-        }
+    }
         
     func removePhotoAndThumbnail(photoUrl: String, thumbnailUrl: String, completion: @escaping () -> (), error: @escaping () -> ()) {
             
-            // Get just the file name which is everything after "/files/".
-            // In BE, we can't remove files by its full URL name, need to do it this way
-            let photoFile = photoUrl.components(separatedBy: "/files/").last
-            
-            // talking to file service not the other one
-            backendless.fileService.remove( photoFile,
+        // Get just the file name which is everything after "/files/".
+        // In BE, we can't remove files by its full URL name, need to do it this way
+        let photoFile = photoUrl.components(separatedBy: "/files/").last
+        
+        // talking to file service not the other one
+        backendless.fileService.remove( photoFile,
+                                        
+            response: { (result: Any!) -> () in
+                print("Photo has been removed: result = \(result)")
+                
+                // Get just the file name which is everything after "/files/".
+                let thumbnailFile = thumbnailUrl.components(separatedBy: "/files/").last
+                
+                self.backendless.fileService.remove( thumbnailFile,
+                                                     
+                     response: { (result: Any!) -> () in
+                        print("Thumbnail has been removed: result = \(result)")
+                        completion()
+                    },
+                                                     
+                     error: { (fault : Fault?) -> () in
+                        print("Failed to remove thumbnail: \(fault)")
+                        error()
+                    }
+                )
+            },
                                             
-                                            response: { (result: Any!) -> () in
-                                                print("Photo has been removed: result = \(result)")
-                                                
-                                                // Get just the file name which is everything after "/files/".
-                                                let thumbnailFile = thumbnailUrl.components(separatedBy: "/files/").last
-                                                
-                                                self.backendless.fileService.remove( thumbnailFile,
-                                                                                     
-                                                                                     response: { (result: Any!) -> () in
-                                                                                        print("Thumbnail has been removed: result = \(result)")
-                                                                                        completion()
-                                                    },
-                                                                                     
-                                                                                     error: { (fault : Fault?) -> () in
-                                                                                        print("Failed to remove thumbnail: \(fault)")
-                                                                                        error()
-                                                    }
-                                                )
-                },
-                                            
-                                            error: { (fault : Fault?) -> () in
-                                                print("Failed to remove photo: \(fault)")
-                                                error()
-                }
-            )
-        }
+            error: { (fault : Fault?) -> () in
+                print("Failed to remove photo: \(fault)")
+                error()
+            }
+        )
+    }
 }
