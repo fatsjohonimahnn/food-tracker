@@ -9,11 +9,17 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginBtn: UIButton!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        
         
     }
 
@@ -34,6 +40,8 @@ class LoginViewController: UIViewController {
         } else {
             performSegue(withIdentifier: "loginToNav", sender: sender)
         }
+    }
+    @IBAction func createAccountBtn(_ sender: UIButton) {
     }
     
     @IBAction func logoutBtn(_ sender: UIButton) {

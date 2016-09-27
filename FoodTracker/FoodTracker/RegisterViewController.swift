@@ -10,6 +10,13 @@ import UIKit
 
 class RegisterViewController: UIViewController {
 
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var passwordConfirmTextField: UITextField!
+    
+    @IBOutlet weak var registerBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,15 +28,9 @@ class RegisterViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func register(_ sender: UIButton) {
     }
-    */
-
+    
+    @IBAction func cancel(_ sender: UIButton) {
+    }
 }

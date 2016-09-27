@@ -214,6 +214,9 @@
                                             <constraint firstAttribute="height" constant="30" id="eFI-b3-kvx"/>
                                         </constraints>
                                         <state key="normal" title="Create Account"/>
+                                        <connections>
+                                            <action selector="createAccountBtn:" destination="O3Z-Nl-MAz" eventType="touchUpInside" id="Rqu-DA-FEv"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nyU-WX-OJ3">
                                         <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -247,8 +250,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="emailTextField" destination="oVa-kG-ezE" id="2wV-aJ-FXM"/>
+                        <outlet property="loginBtn" destination="9XB-QS-sbp" id="F1b-ff-fh8"/>
+                        <outlet property="passwordTextField" destination="A6X-bL-5Ae" id="ID1-YO-Iky"/>
+                        <outlet property="spinner" destination="dX2-Jr-jrp" id="FBF-tl-he2"/>
                         <segue destination="ZMB-hr-CPv" kind="show" identifier="loginToNav" id="AoU-5g-otX"/>
-                        <segue destination="Rog-3K-Mqo" kind="presentation" id="TlK-3N-sqt"/>
+                        <segue destination="Rog-3K-Mqo" kind="presentation" identifier="loginToRegister" id="TlK-3N-sqt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q08-oS-c0v" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -292,6 +299,9 @@
                                     <constraint firstAttribute="width" constant="100" id="qcp-H2-DdE"/>
                                 </constraints>
                                 <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancel:" destination="Rog-3K-Mqo" eventType="touchUpInside" id="nzZ-YV-3Jf"/>
+                                </connections>
                             </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Ab9-pM-BCk">
                                 <color key="color" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -329,6 +339,9 @@
                                     <constraint firstAttribute="height" constant="30" id="hq8-b1-q2b"/>
                                 </constraints>
                                 <state key="normal" title="Create Account"/>
+                                <connections>
+                                    <action selector="register:" destination="Rog-3K-Mqo" eventType="touchUpInside" id="2VU-Sk-pHk"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -348,7 +361,12 @@
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="ZMB-hr-CPv" kind="show" id="Kf7-0z-qnk"/>
+                        <outlet property="emailTextField" destination="anf-EM-Qhy" id="QCA-re-0Ie"/>
+                        <outlet property="passwordConfirmTextField" destination="H1r-IF-Zvu" id="Jf8-4r-BzJ"/>
+                        <outlet property="passwordTextField" destination="fpF-wY-njw" id="fwJ-pQ-49Y"/>
+                        <outlet property="registerBtn" destination="A7x-6A-LEx" id="wG0-i3-sBG"/>
+                        <outlet property="spinner" destination="Ab9-pM-BCk" id="dep-gJ-hod"/>
+                        <segue destination="ZMB-hr-CPv" kind="show" identifier="registerToTV" id="Kf7-0z-qnk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WvY-0y-hIC" userLabel="First Responder" sceneMemberID="firstResponder"/>
