@@ -32,25 +32,25 @@ class RegisterViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-//    // helper function to check if textFields have input, used in viewDidLoad
-//    func textFieldChanged(textField: UITextField) {
-//        
-//        if emailTextField.text == "" || passwordTextField.text == "" || passwordConfirmTextField.text == "" {
-//            registerBtn.isEnabled = false
-//        } else {
-//            registerBtn.isEnabled = true
-//        }
-//    }
+    // helper function to check if textFields have input, used in viewDidLoad
+    func textFieldChanged(textField: UITextField) {
+        
+        if emailTextField.text == "" || passwordTextField.text == "" || passwordConfirmTextField.text == "" {
+            registerBtn.isEnabled = false
+        } else {
+            registerBtn.isEnabled = true
+        }
+    }
     
     @IBAction func register(_ sender: UIButton) {
         
-        if passwordTextField.text != passwordConfirmTextField.text {
-            Utility.showAlert(viewController: self, title: "Registration Error", message: "Password confirmation failed. Please enter your password try again.")
+        if !Utility.isValidEmail(emailAddress: emailTextField.text!) {
+            Utility.showAlert(viewController: self, title: "Registration Error", message: "Please enter a valid email address")
             return
         }
         
-        if !Utility.isValidEmail(emailAddress: emailTextField.text!) {
-            Utility.showAlert(viewController: self, title: "Registration Error", message: "Please enter a valid email address")
+        if passwordTextField.text != passwordConfirmTextField.text {
+            Utility.showAlert(viewController: self, title: "Registration Error", message: "Password confirmation failed. Please enter your password try again.")
             return
         }
         

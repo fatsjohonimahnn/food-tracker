@@ -25,8 +25,6 @@ class MealData: NSObject, NSCoding {
     
     var objectId: String?
     var photoUrl: String?
-    
-    // thumbnail photo
     var thumbnailUrl: String?
     
     // used as a book marking place for later func 

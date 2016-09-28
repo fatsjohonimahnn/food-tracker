@@ -32,4 +32,12 @@ class Utility {
         viewController.present(alertController, animated: true, completion: nil)
     }
     
+    static func delayTask(seconds: Double, task: @escaping () -> ()) {
+        
+        let dispatchTime = DispatchTime.now() + Double(Int64(seconds * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
+            task()
+        })
+    }
+    
 }

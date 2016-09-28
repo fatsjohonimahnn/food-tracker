@@ -28,7 +28,6 @@ class MealTableViewController: UITableViewController {
                 
                 self.meals += mealData
                 self.tableView.reloadData()
-
             }
             
         } else {
@@ -39,8 +38,9 @@ class MealTableViewController: UITableViewController {
                 meals += savedMeals
             } else {
                 // Load the sample data.
-                
-                loadSampleMeals()
+
+// HACK: Disabled sample meal data for now!
+//                loadSampleMeals()
             }
         }
     }
@@ -79,8 +79,7 @@ class MealTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
-        
+        // Table view cells are reused and should be dequeued using a cell identifier.
         let cellIdentifier = "mealTableViewCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MealTableViewCell
         
@@ -88,7 +87,9 @@ class MealTableViewController: UITableViewController {
         let meal = meals[(indexPath as NSIndexPath).row]
         
         cell.nameLabel.text = meal.name
-        //cell.photoImageView.image = meal.photo
+        
+        // don't need this anymore since we are loading thumbnails
+        cell.photoImageView.image = nil
         cell.ratingControl.rating = meal.rating
 
         // Added thumbnailUrl
@@ -103,6 +104,8 @@ class MealTableViewController: UITableViewController {
     
     // Added thumbnailUrl
     func loadImageFromUrl(cell: MealTableViewCell, thumbnailUrl: String) {
+        
+        cell.spinner.startAnimating()
         
         let url = URL(string: thumbnailUrl )!
         
@@ -121,15 +124,17 @@ class MealTableViewController: UITableViewController {
                         // We got the image data! Use it to create a UIImage for our cell's
                         // UIImageView. Then, stop the activity spinner.
                         cell.photoImageView.image = UIImage(data: data)
-                        //cell.activityIndicator.stopAnimating()
+                        cell.spinner.stopAnimating()
                     }
                     
                 } catch {
                     print("NSData Error: \(error)")
+                    cell.spinner.stopAnimating()
                 }
                 
             } else {
                 print("NSURLSession Error: \(error)")
+                cell.spinner.stopAnimating()
             }
         })
         

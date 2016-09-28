@@ -22,6 +22,15 @@ class LoginViewController: UIViewController {
         // use below helper method here to give textFields ability to check for input
         emailTextField.addTarget(self, action: #selector(LoginViewController.textFieldChanged(textField:)), for: UIControlEvents.editingChanged)
         passwordTextField.addTarget(self, action: #selector(LoginViewController.textFieldChanged(textField:)), for: UIControlEvents.editingChanged)
+        
+        Utility.delayTask(seconds: 2) {
+            
+            if BackendlessManager.sharedInstance.APP_ID == "<replace-with-your-app-id>" ||
+                BackendlessManager.sharedInstance.SECRET_KEY == "<replace-with-your-secret-key>" {
+                
+                Utility.showAlert(viewController: self, title: "Backendless Error", message: "To use this sample you must register with Backendless, create an app, and replace the APP_ID and SECRET_KEY in this sample's BackendlessManager class with the values from your app's settings.")
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

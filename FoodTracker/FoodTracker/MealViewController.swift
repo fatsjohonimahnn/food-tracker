@@ -126,13 +126,6 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     
     // MARK: Navigation
     
-//    // Remove to allow saving of meal before we head back to the table view
-//    // This method lets you configure a view controller before it's presented.
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        
-//        if saveButton === sender as! UIBarButtonItem {
-    
-    // rewritten from perform segue
     @IBAction func save(_ sender: UIBarButtonItem) {
         
         // turn off save button when pressed once

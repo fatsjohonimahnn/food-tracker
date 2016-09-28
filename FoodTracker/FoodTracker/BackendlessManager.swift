@@ -25,8 +25,8 @@ class BackendlessManager {
     
     let backendless = Backendless.sharedInstance()!
     
-    let APP_ID = "<App-id>"
-    let SECRET_KEY = "<App-secret-key>"
+    let APP_ID = "<replace-with-your-app-id>"
+    let SECRET_KEY = "<replace-with-your-secret-key>"
     let VERSION_NUM = "v1"
     
     func initApp() {

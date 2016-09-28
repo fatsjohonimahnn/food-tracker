@@ -45,6 +45,7 @@
                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Ovm-Tu-iYh">
                                             <frame key="frameInset" minX="27" minY="29" width="37" height="37"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </activityIndicatorView>
                                     </subviews>
                                     <constraints>
@@ -61,6 +62,7 @@
                                     <outlet property="nameLabel" destination="R9T-kW-g8y" id="Jb2-6x-ThP"/>
                                     <outlet property="photoImageView" destination="WPr-yi-vHT" id="Xhc-Ve-O2g"/>
                                     <outlet property="ratingControl" destination="pD1-jv-11M" id="eHA-PD-fxe"/>
+                                    <outlet property="spinner" destination="Ovm-Tu-iYh" id="dpW-Xl-WF4"/>
                                     <segue destination="BYZ-38-t0r" kind="show" identifier="showDetail" id="6C4-Mg-POt"/>
                                 </connections>
                             </tableViewCell>
@@ -269,7 +271,7 @@
         <!--Navigation Controller-->
         <scene sceneID="1bn-bP-gOg">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZMB-hr-CPv" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="mealNavController" automaticallyAdjustsScrollViewInsets="NO" id="ZMB-hr-CPv" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qot-wY-WMm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
