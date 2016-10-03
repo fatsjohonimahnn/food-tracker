@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Uyr-81-V95" id="M5l-Ps-7ah">
-                                    <frame key="frameInset" width="375" height="89.5"/>
+                                    <frame key="frameInset" width="375" height="89"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="WPr-yi-vHT">
@@ -392,7 +392,16 @@
                                                     <action selector="logout:" destination="Rf5-ix-hEb" eventType="touchUpInside" id="hqo-Sb-ogR"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uPQ-RI-LM7">
+                                                <state key="normal" title="Create Account"/>
+                                                <connections>
+                                                    <action selector="createAccount:" destination="Rf5-ix-hEb" eventType="touchUpInside" id="U2r-gH-tPK"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="u0g-T8-IYW" firstAttribute="centerX" secondItem="OtF-8H-LvZ" secondAttribute="centerX" id="982-N1-Fcz"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                             </stackView>
@@ -405,6 +414,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="gear_black_small" id="Ve2-8j-DvH"/>
                     <connections>
+                        <outlet property="createAccount" destination="uPQ-RI-LM7" id="xhM-9o-W0v"/>
                         <outlet property="spinner" destination="u0g-T8-IYW" id="V4s-LF-fa5"/>
                         <segue destination="O3Z-Nl-MAz" kind="presentation" identifier="goToLogin" id="TW2-wI-vbb"/>
                     </connections>

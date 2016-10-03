@@ -11,11 +11,17 @@ import UIKit
 class SettingsVC: UIViewController {
 
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var createAccount: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if BackendlessManager.sharedInstance.isUserLoggedIn() == true {
+            createAccount.isHidden = true
+        } else {
+            createAccount.isHidden = false
+        }
 
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,6 +32,7 @@ class SettingsVC: UIViewController {
     @IBAction func logout(_ sender: UIButton) {
         
         spinner.startAnimating()
+        
         
          BackendlessManager.sharedInstance.logoutUser(completion: {
             
@@ -43,6 +50,10 @@ class SettingsVC: UIViewController {
         })
     }
 
+    @IBAction func createAccount(_ sender: UIButton) {
+        
+        performSegue(withIdentifier: "goToLogin", sender: sender)
+    }
     /*
     // MARK: - Navigation
 
