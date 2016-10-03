@@ -27,7 +27,7 @@ class MealData: NSObject, NSCoding {
     var photoUrl: String?
     var thumbnailUrl: String?
     
-    // used as a book marking place for later func 
+    // used as a book marking place in BackendlessManager
     var replacePhoto: Bool = false
     
     

@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // First make sure we are in the Main.storyboard
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
-            // Make sure to give starting Navigation Controller a SB id in idin
+// Make sure to give starting Navigation Controller a SB id in idin
             self.window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "mealNavController")
         }
         

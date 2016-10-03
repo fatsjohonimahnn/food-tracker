@@ -13,7 +13,7 @@
             <objects>
                 <tableViewController id="FlT-Sg-wR1" customClass="MealTableViewController" customModule="FoodTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" id="IGj-5r-vmQ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
@@ -82,7 +82,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t2s-Mq-Nh7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="377" y="399"/>
+            <point key="canvasLocation" x="1316" y="398.95052473763121"/>
         </scene>
         <!--New Meal-->
         <scene sceneID="tne-QT-ifu">
@@ -93,7 +93,7 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="560" placeholderIntrinsicHeight="418" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="2DJ-qU-vdp">
@@ -165,7 +165,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1950" y="399"/>
+            <point key="canvasLocation" x="2888.8000000000002" y="398.95052473763121"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="fFv-he-w83">
@@ -224,17 +224,6 @@
                                             <action selector="createAccountBtn:" destination="O3Z-Nl-MAz" eventType="touchUpInside" id="Rqu-DA-FEv"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nyU-WX-OJ3">
-                                        <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="Klw-OK-Mlx"/>
-                                            <constraint firstAttribute="width" constant="90" id="dA0-vv-lw8"/>
-                                        </constraints>
-                                        <state key="normal" title="Log Out"/>
-                                        <connections>
-                                            <action selector="logoutBtn:" destination="O3Z-Nl-MAz" eventType="touchUpInside" id="352-gB-g0u"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3CE-OO-nlc">
                                         <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -260,7 +249,7 @@
                         <outlet property="loginBtn" destination="9XB-QS-sbp" id="F1b-ff-fh8"/>
                         <outlet property="passwordTextField" destination="A6X-bL-5Ae" id="ID1-YO-Iky"/>
                         <outlet property="spinner" destination="dX2-Jr-jrp" id="FBF-tl-he2"/>
-                        <segue destination="ZMB-hr-CPv" kind="show" identifier="loginToNav" id="AoU-5g-otX"/>
+                        <segue destination="cKd-a7-lRj" kind="show" identifier="loginToNav" id="AoU-5g-otX"/>
                         <segue destination="Rog-3K-Mqo" kind="presentation" identifier="loginToRegister" id="TlK-3N-sqt"/>
                     </connections>
                 </viewController>
@@ -268,10 +257,11 @@
             </objects>
             <point key="canvasLocation" x="-1210" y="18"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Meals-->
         <scene sceneID="1bn-bP-gOg">
             <objects>
                 <navigationController storyboardIdentifier="mealNavController" automaticallyAdjustsScrollViewInsets="NO" id="ZMB-hr-CPv" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Meals" image="Meal_icons" id="rYA-6P-TvP"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qot-wY-WMm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -284,7 +274,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uHK-Wi-3Ql" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-416" y="399"/>
+            <point key="canvasLocation" x="522.39999999999998" y="398.95052473763121"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="UQ5-ls-bhE">
@@ -372,12 +362,56 @@
                         <outlet property="passwordTextField" destination="fpF-wY-njw" id="fwJ-pQ-49Y"/>
                         <outlet property="registerBtn" destination="A7x-6A-LEx" id="wG0-i3-sBG"/>
                         <outlet property="spinner" destination="Ab9-pM-BCk" id="dep-gJ-hod"/>
-                        <segue destination="ZMB-hr-CPv" kind="show" identifier="registerToTV" id="Kf7-0z-qnk"/>
+                        <segue destination="cKd-a7-lRj" kind="show" identifier="registerToTV" id="Kf7-0z-qnk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WvY-0y-hIC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1210" y="847"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="jDA-D5-oYx">
+            <objects>
+                <viewController id="Rf5-ix-hEb" customClass="SettingsVC" customModule="FoodTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OqS-Dk-VoM"/>
+                        <viewControllerLayoutGuide type="bottom" id="UJH-st-H79"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tCw-gB-xRa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="Hew-Ew-ZFe">
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="OtF-8H-LvZ">
+                                        <subviews>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="u0g-T8-IYW"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZOz-a6-1zo">
+                                                <state key="normal" title="Log Out"/>
+                                                <connections>
+                                                    <action selector="logout:" destination="Rf5-ix-hEb" eventType="touchUpInside" id="hqo-Sb-ogR"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Hew-Ew-ZFe" firstAttribute="top" secondItem="OqS-Dk-VoM" secondAttribute="bottom" constant="60" id="PKj-cN-KbG"/>
+                            <constraint firstItem="Hew-Ew-ZFe" firstAttribute="centerX" secondItem="tCw-gB-xRa" secondAttribute="centerX" id="Qkp-tt-Dou"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Settings" image="gear_black_small" id="Ve2-8j-DvH"/>
+                    <connections>
+                        <outlet property="spinner" destination="u0g-T8-IYW" id="V4s-LF-fa5"/>
+                        <segue destination="O3Z-Nl-MAz" kind="presentation" identifier="goToLogin" id="TW2-wI-vbb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gBj-QR-zMi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-370.39999999999998" y="1329.9850074962519"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SYU-c7-X4m">
@@ -395,14 +429,35 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wm3-wv-cMk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1170" y="793"/>
+            <point key="canvasLocation" x="2108" y="792.95352323838085"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="svs-w9-JWM">
+            <objects>
+                <tabBarController storyboardIdentifier="tabBarController" automaticallyAdjustsScrollViewInsets="NO" id="cKd-a7-lRj" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="Kwj-JU-G0F">
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="ZMB-hr-CPv" kind="relationship" relationship="viewControllers" id="g7O-LW-Voq"/>
+                        <segue destination="Rf5-ix-hEb" kind="relationship" relationship="viewControllers" id="dX4-vy-ibX"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s7C-2w-9JK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-416.80000000000001" y="398.95052473763121"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Meal_icons" width="20" height="20"/>
         <image name="defaultPhoto" width="540" height="540"/>
+        <image name="gear_black_small" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Kf7-0z-qnk"/>
+        <segue reference="AoU-5g-otX"/>
         <segue reference="6C4-Mg-POt"/>
     </inferredMetricsTieBreakers>
 </document>

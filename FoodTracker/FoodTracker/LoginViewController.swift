@@ -79,23 +79,6 @@ class LoginViewController: UIViewController {
         performSegue(withIdentifier: "loginToRegister", sender: sender)
     }
     
-// TODO: move this
-    @IBAction func logoutBtn(_ sender: UIButton) {
-        
-        
-        BackendlessManager.sharedInstance.logoutUser(completion: {
-            
-            self.spinner.stopAnimating()
-            
-            // chance to add code to segue back when we move this button
-            
-                },
-                                                     
-            error: { message in
-            
-            Utility.showAlert(viewController: self, title: "Logout Error", message: message)
-        })
-    }
 
     @IBAction func skipBtn(_ sender: UIButton) {
         self.performSegue(withIdentifier: "loginToNav", sender: sender)
