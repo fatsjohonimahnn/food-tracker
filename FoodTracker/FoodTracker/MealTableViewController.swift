@@ -21,7 +21,7 @@ class MealTableViewController: UITableViewController {
         
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
-
+        
         if BackendlessManager.sharedInstance.isUserLoggedIn() {
             // calling .loadMeals from BEManager with the closure
             BackendlessManager.sharedInstance.loadMeals { mealData in
@@ -40,7 +40,7 @@ class MealTableViewController: UITableViewController {
                 // Load the sample data.
 
 // HACK: Disabled sample meal data for now!
-//                loadSampleMeals()
+                loadSampleMeals()
             }
         }
     }

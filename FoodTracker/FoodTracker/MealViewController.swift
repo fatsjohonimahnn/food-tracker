@@ -14,6 +14,7 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     
     // MARK: Properties
     
+    @IBOutlet weak var plusButton: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var ratingControl: RatingControl!
@@ -114,6 +115,9 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
             meal?.replacePhoto = true
         }
         
+        // Hide plus button
+        plusButton.isHidden = true
+        
         // Set photoImageView to display the selected image.
         photoImageView.image = selectedImage
         
@@ -190,16 +194,13 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
 
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         
-        // Depending on style of presentation (modal or push presentation),
-        // this view controller needs to be dismissed in two different ways.
-        let isPresentingInAddMealMode = presentingViewController is UINavigationController
+        _ = self.navigationController?.popViewController(animated: true)
         
-        if isPresentingInAddMealMode {
-            dismiss(animated: true, completion: nil)
-        }
-        else {
-            navigationController!.popViewController(animated: true)
-        }
+        dismiss(animated: true, completion: nil)
+        
+       // performSegue(withIdentifier: "backToTV", sender: sender)
+        
+        
     }
     
     // MARK: Actions
@@ -223,6 +224,8 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     }
     
     func loadImageFromUrl(imageView: UIImageView, photoUrl: String) {
+        
+        plusButton.isHidden = true
         
         saveSpinner.startAnimating()
         
