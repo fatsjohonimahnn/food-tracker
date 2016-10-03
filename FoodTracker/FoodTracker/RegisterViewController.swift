@@ -89,6 +89,6 @@ class RegisterViewController: UIViewController {
         
         spinner.stopAnimating()
         
-        dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "registerToLogin", sender: sender)
     }
 }

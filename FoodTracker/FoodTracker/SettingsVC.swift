@@ -12,6 +12,7 @@ class SettingsVC: UIViewController {
 
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var createAccount: UIButton!
+    @IBOutlet weak var logoutButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,7 @@ class SettingsVC: UIViewController {
             createAccount.isHidden = true
         } else {
             createAccount.isHidden = false
+            logoutButton.isHidden = true
         }
 
     }
@@ -52,7 +54,7 @@ class SettingsVC: UIViewController {
 
     @IBAction func createAccount(_ sender: UIButton) {
         
-        performSegue(withIdentifier: "goToLogin", sender: sender)
+        performSegue(withIdentifier: "goToRegister", sender: sender)
     }
     /*
     // MARK: - Navigation

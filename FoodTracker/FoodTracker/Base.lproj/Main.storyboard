@@ -363,11 +363,12 @@
                         <outlet property="registerBtn" destination="A7x-6A-LEx" id="wG0-i3-sBG"/>
                         <outlet property="spinner" destination="Ab9-pM-BCk" id="dep-gJ-hod"/>
                         <segue destination="cKd-a7-lRj" kind="show" identifier="registerToTV" id="Kf7-0z-qnk"/>
+                        <segue destination="O3Z-Nl-MAz" kind="presentation" identifier="registerToLogin" id="Zlq-MO-BpR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WvY-0y-hIC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1210" y="847"/>
+            <point key="canvasLocation" x="-1210" y="768"/>
         </scene>
         <!--Settings-->
         <scene sceneID="jDA-D5-oYx">
@@ -399,9 +400,6 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstItem="u0g-T8-IYW" firstAttribute="centerX" secondItem="OtF-8H-LvZ" secondAttribute="centerX" id="982-N1-Fcz"/>
-                                        </constraints>
                                     </stackView>
                                 </subviews>
                             </stackView>
@@ -415,8 +413,10 @@
                     <tabBarItem key="tabBarItem" title="Settings" image="gear_black_small" id="Ve2-8j-DvH"/>
                     <connections>
                         <outlet property="createAccount" destination="uPQ-RI-LM7" id="xhM-9o-W0v"/>
+                        <outlet property="logoutButton" destination="ZOz-a6-1zo" id="I34-PM-0lL"/>
                         <outlet property="spinner" destination="u0g-T8-IYW" id="V4s-LF-fa5"/>
                         <segue destination="O3Z-Nl-MAz" kind="presentation" identifier="goToLogin" id="TW2-wI-vbb"/>
+                        <segue destination="Rog-3K-Mqo" kind="presentation" identifier="goToRegister" id="4Lo-kv-itd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gBj-QR-zMi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -467,7 +467,9 @@
         <image name="gear_black_small" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="AoU-5g-otX"/>
+        <segue reference="Zlq-MO-BpR"/>
+        <segue reference="4Lo-kv-itd"/>
+        <segue reference="Kf7-0z-qnk"/>
         <segue reference="6C4-Mg-POt"/>
     </inferredMetricsTieBreakers>
 </document>
