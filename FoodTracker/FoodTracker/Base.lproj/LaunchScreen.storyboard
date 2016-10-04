@@ -19,12 +19,6 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="food-tracker-launch-screen-bg" translatesAutoresizingMaskIntoConstraints="NO" id="zSj-LK-0TE"/>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star-cluster1" translatesAutoresizingMaskIntoConstraints="NO" id="GOj-9s-viy">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="78" id="i70-qZ-zIo"/>
-                                    <constraint firstAttribute="height" constant="62" id="wck-Rq-S8S"/>
-                                </constraints>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star-cluster2" translatesAutoresizingMaskIntoConstraints="NO" id="Gx6-Qs-jg1">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="53" id="SEW-N1-374"/>
@@ -37,19 +31,25 @@
                                     <constraint firstAttribute="height" constant="52" id="kfQ-wc-CqV"/>
                                 </constraints>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star-cluster1" translatesAutoresizingMaskIntoConstraints="NO" id="GOj-9s-viy">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="78" id="i70-qZ-zIo"/>
+                                    <constraint firstAttribute="height" constant="62" id="wck-Rq-S8S"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="yME-S1-85e" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" constant="8" id="8wN-HF-Hgc"/>
+                            <constraint firstItem="yME-S1-85e" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" constant="10" id="8wN-HF-Hgc"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="zSj-LK-0TE" secondAttribute="bottom" id="AHb-T2-YIA"/>
                             <constraint firstItem="zSj-LK-0TE" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="BxE-08-cBS"/>
-                            <constraint firstItem="GOj-9s-viy" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-194.5" id="GtG-Um-YHu"/>
-                            <constraint firstItem="GOj-9s-viy" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" constant="125.5" id="NOi-4a-LRa"/>
+                            <constraint firstItem="GOj-9s-viy" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-255.5" id="GtG-Um-YHu"/>
+                            <constraint firstItem="GOj-9s-viy" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" constant="132.5" id="NOi-4a-LRa"/>
                             <constraint firstAttribute="trailing" secondItem="zSj-LK-0TE" secondAttribute="trailing" id="QLF-S4-5fT"/>
-                            <constraint firstItem="yME-S1-85e" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-172.5" id="TNA-Fp-r5n"/>
+                            <constraint firstItem="yME-S1-85e" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-236.5" id="TNA-Fp-r5n"/>
                             <constraint firstItem="zSj-LK-0TE" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="dK9-hz-7EQ"/>
-                            <constraint firstItem="Gx6-Qs-jg1" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" constant="-140.5" id="h0l-iq-AQ9"/>
-                            <constraint firstItem="Gx6-Qs-jg1" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-194" id="lR7-it-ynZ"/>
+                            <constraint firstItem="Gx6-Qs-jg1" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" constant="-132.5" id="h0l-iq-AQ9"/>
+                            <constraint firstItem="Gx6-Qs-jg1" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-260" id="lR7-it-ynZ"/>
                         </constraints>
                     </view>
                 </viewController>

@@ -1,7 +1,7 @@
 # food-tracker
 Track and rate meals
 
-This project was created from Apple's Start Developing iOS Apps but has been dramatically changed to allow Backendless data base services
+Originally, this project was created from Apple's "Start Developing iOS Apps" but has been dramatically changed to allow Backendless data base services and other features listed below.
 
 https://developer.apple.com/library/content/referencelibrary/GettingStarted/DevelopiOSAppsSwift/index.html#//apple_ref/doc/uid/TP40015214-CH2-SW1
 

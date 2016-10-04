@@ -74,8 +74,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Your Meals" id="dE9-jQ-Iv7">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="W98-0n-0lF"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="gYh-2M-d0e">
+                        <barButtonItem key="leftBarButtonItem" title=" " id="W98-0n-0lF">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="plus-symbol" id="gYh-2M-d0e">
                             <connections>
                                 <segue destination="NG8-nh-yHh" kind="show" identifier="addItem" id="1Hv-It-dPH"/>
                             </connections>
@@ -369,7 +371,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H1r-IF-Zvu">
                                         <constraints>
@@ -377,7 +379,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Ab9-pM-BCk">
                                         <constraints>
@@ -452,13 +454,13 @@
                         <outlet property="passwordTextField" destination="fpF-wY-njw" id="fwJ-pQ-49Y"/>
                         <outlet property="registerBtn" destination="A7x-6A-LEx" id="wG0-i3-sBG"/>
                         <outlet property="spinner" destination="Ab9-pM-BCk" id="dep-gJ-hod"/>
-                        <segue destination="cKd-a7-lRj" kind="show" identifier="registerToTV" id="Kf7-0z-qnk"/>
                         <segue destination="O3Z-Nl-MAz" kind="presentation" identifier="registerToLogin" id="Zlq-MO-BpR"/>
+                        <segue destination="cKd-a7-lRj" kind="show" identifier="registerToTV" id="gnd-8b-Tva"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WvY-0y-hIC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1210.4000000000001" y="767.76611694152928"/>
+            <point key="canvasLocation" x="-1639" y="793"/>
         </scene>
         <!--Settings-->
         <scene sceneID="jDA-D5-oYx">
@@ -535,7 +537,7 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="Kwj-JU-G0F">
                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
                         <segue destination="ZMB-hr-CPv" kind="relationship" relationship="viewControllers" id="g7O-LW-Voq"/>
@@ -557,13 +559,14 @@
         <image name="gear_black_small" width="21" height="21"/>
         <image name="greyloginsquare" width="349" height="374"/>
         <image name="new_photo_icon" width="59" height="46"/>
+        <image name="plus-symbol" width="33" height="31"/>
         <image name="rounded-login-btn" width="320" height="46"/>
         <image name="sign-in-btn" width="320" height="46"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Kf7-0z-qnk"/>
-        <segue reference="TlK-3N-sqt"/>
+        <segue reference="AoU-5g-otX"/>
         <segue reference="Zlq-MO-BpR"/>
+        <segue reference="TlK-3N-sqt"/>
         <segue reference="6C4-Mg-POt"/>
     </inferredMetricsTieBreakers>
 </document>

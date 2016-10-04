@@ -15,7 +15,7 @@ class Utility {
     
     // This prevents others from using the default '()' initializer for this class.
     private init() {}
-    
+        
     static func isValidEmail(emailAddress: String) -> Bool {
         
         // use of regular expression to make sure emails are formatted correctly

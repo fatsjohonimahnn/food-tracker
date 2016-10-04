@@ -21,14 +21,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         BackendlessManager.sharedInstance.initApp()
         
         if BackendlessManager.sharedInstance.isUserLoggedIn() {
-            
+        
             // If the user is logged in - skip the login view and go straight to the meal list!
             
             // First make sure we are in the Main.storyboard
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
 // Make sure to give starting Navigation Controller a SB id in idin
-            self.window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "mealNavController")
+            self.window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "tabBarController")
         }
         
         return true

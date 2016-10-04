@@ -41,8 +41,10 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
             ratingControl.rating = meal.rating
             
             if BackendlessManager.sharedInstance.isUserLoggedIn() && meal.photoUrl != nil {
+                plusButton.isHidden = true
                 loadImageFromUrl(imageView: photoImageView, photoUrl: meal.photoUrl!)
             } else {
+                plusButton.isHidden = true
                 photoImageView.image = meal.photo
             }
         }

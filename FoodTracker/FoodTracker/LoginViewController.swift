@@ -81,6 +81,7 @@ class LoginViewController: UIViewController {
     
 
     @IBAction func skipBtn(_ sender: UIButton) {
+        
         self.performSegue(withIdentifier: "loginToNav", sender: sender)
     }
 }

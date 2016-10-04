@@ -16,18 +16,36 @@ class MealTableViewController: UITableViewController {
     
     let backendless = Backendless.sharedInstance()
     
+    var isPresentingVCRegister: Bool? = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("\(isPresentingVCRegister)")
+        
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
+        navigationItem.leftBarButtonItem?.width = 105.0
+        navigationItem.leftBarButtonItem?.image = UIImage(named: "edit-symbol")
         
+        if isPresentingVCRegister == true {
+            
+            loadSampleMeals()
+                        
+            isPresentingVCRegister = false
+            
+            print("\(isPresentingVCRegister)")
+            
+        } else {
+            print ("thePresenter is not RegisterViewController")
+        }
+            
         if BackendlessManager.sharedInstance.isUserLoggedIn() {
-            // calling .loadMeals from BEManager with the closure
-            BackendlessManager.sharedInstance.loadMeals { mealData in
-                
-                self.meals += mealData
-                self.tableView.reloadData()
+        // calling .loadMeals from BEManager with the closure
+        BackendlessManager.sharedInstance.loadMeals { mealData in
+            
+            self.meals += mealData
+            self.tableView.reloadData()
             }
             
         } else {
@@ -39,7 +57,7 @@ class MealTableViewController: UITableViewController {
             } else {
                 // Load the sample data.
 
-// HACK: Disabled sample meal data for now!
+
                 loadSampleMeals()
             }
         }
@@ -151,12 +169,15 @@ class MealTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
+        
+        
         if editingStyle == .delete {
             
-            if BackendlessManager.sharedInstance.isUserLoggedIn() {
+            let mealToRemove = meals[indexPath.row]
+            
+            if BackendlessManager.sharedInstance.isUserLoggedIn() && mealToRemove.name != "Caprese Salad" && mealToRemove.name != "Chicken and Potatoes" && mealToRemove.name != "Pasta with Meatballs"{
                 
                 // Find the MealData in the data source we wish to delete
-                let mealToRemove = meals[indexPath.row]
                 
                 BackendlessManager.sharedInstance.removeMeal(mealToRemove: mealToRemove,
                                                              
@@ -193,6 +214,8 @@ class MealTableViewController: UITableViewController {
             }
             
         } else if editingStyle == .insert {
+            
+            navigationItem.leftBarButtonItem?.title = ""
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }

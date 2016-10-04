@@ -400,7 +400,7 @@ class BackendlessManager {
     // says the request occured and the DB deletes it and then its removed from the table
     func removeMeal(mealToRemove: MealData, completion: @escaping () -> (), error: @escaping () -> ()) {
         
-        print("Remove Meal: \(mealToRemove.objectId!)")
+     //   print("Remove Meal: \(mealToRemove.objectId!)")
         
         let dataStore = backendless.persistenceService.of(Meal.ofClass())
         
