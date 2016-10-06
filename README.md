@@ -106,6 +106,31 @@ if imageCache.object(forKey: meal.thumbnailUrl! as NSString) != nil {
 // Since we went to the trouble of pulling down the image data and
 // building a UIImage lets cache the UIImage using the URL as the key.
 self.imageCache.setObject(image, forKey: meal.thumbnailUrl! as NSString)
+----------------------------------------------------------------
+Fix the Edit button on TableView
+
+see MealTableViewController
+
+// Add for action selector on custom UIBarButtonItem
+func onEditButton(sender: UIBarButtonItem) {
+    
+    self.tableView.isEditing = !self.tableView.isEditing
+}
+
+in viewDidLoad:
+
+// Disble the Edit button animation
+let leftBarButtonItemImage = UIImage(named: "edit-symbol")!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+        
+// Create the desired button
+let leftBarButtonItem = UIBarButtonItem(image: leftBarButtonItemImage,
+	            style: .plain,
+	            target: self,
+	            action: #selector(onEditButton(sender: )))
+        
+// Set the button on the navbar
+self.navigationItem.leftBarButtonItem = leftBarButtonItem
+
 
 
 ----------------------------------------------------------------

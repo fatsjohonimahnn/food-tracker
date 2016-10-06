@@ -78,6 +78,7 @@
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="plus-symbol" id="gYh-2M-d0e">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="NG8-nh-yHh" kind="show" identifier="addItem" id="1Hv-It-dPH"/>
                             </connections>
@@ -164,11 +165,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="New Meal" id="5j2-lb-dwt">
                         <barButtonItem key="leftBarButtonItem" image="exit" id="coU-Cy-PS3">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="cancel:" destination="BYZ-38-t0r" id="rej-dP-X5a"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="check" id="84l-Sz-WVR">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="save:" destination="BYZ-38-t0r" id="Hxy-1Y-PaB"/>
                             </connections>
@@ -329,6 +332,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qot-wY-WMm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -550,6 +554,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="ZMB-hr-CPv" kind="relationship" relationship="viewControllers" id="g7O-LW-Voq"/>

@@ -28,10 +28,20 @@ class MealTableViewController: UITableViewController {
         // NSCache has built in functions like countLimit
         imageCache.countLimit = 50 // Cache up to 50 UIImage(s)
         
-        // Use the edit button item provided by the table view controller.
-        navigationItem.leftBarButtonItem = editButtonItem
-        navigationItem.leftBarButtonItem?.width = 105.0
-        navigationItem.leftBarButtonItem?.image = UIImage(named: "edit-symbol")
+//        // Use the edit button item provided by the table view controller.
+//        navigationItem.leftBarButtonItem = editButtonItem
+//        navigationItem.leftBarButtonItem?.title = ""
+//        navigationItem.leftBarButtonItem?.image = UIImage(named: "edit-symbol")
+        
+        // Disble the Edit button animation
+        let leftBarButtonItemImage = UIImage(named: "edit-symbol")!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+        // Create the desired button
+        let leftBarButtonItem = UIBarButtonItem(image: leftBarButtonItemImage,
+                                                style: .plain,
+                                                target: self,
+                                                action: #selector(onEditButton(sender: )))
+        // Set the button on the navbar
+        self.navigationItem.leftBarButtonItem = leftBarButtonItem
         
         if isPresentingVCRegister == true {
             
@@ -64,6 +74,11 @@ class MealTableViewController: UITableViewController {
                 loadSampleMeals()
             }
         }
+    }
+    // Add for action selector on custom UIBarButtonItem
+    func onEditButton(sender: UIBarButtonItem) {
+        
+        self.tableView.isEditing = !self.tableView.isEditing
     }
     
     func loadSampleMeals() {
@@ -262,7 +277,6 @@ class MealTableViewController: UITableViewController {
             
         } else if editingStyle == .insert {
             
-            navigationItem.leftBarButtonItem?.title = ""
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }

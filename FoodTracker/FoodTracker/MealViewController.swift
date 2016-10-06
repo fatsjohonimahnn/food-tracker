@@ -193,7 +193,7 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         
         // Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways.
-        let isPresentingInAddMealMode = presentingViewController is UINavigationController
+        let isPresentingInAddMealMode = presentingViewController is UITabBarController
         
         if isPresentingInAddMealMode {
             dismiss(animated: true, completion: nil)
