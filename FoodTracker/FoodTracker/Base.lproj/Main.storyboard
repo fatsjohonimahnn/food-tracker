@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Uyr-81-V95" id="M5l-Ps-7ah">
-                                    <frame key="frameInset" width="375" height="89.5"/>
+                                    <frame key="frameInset" width="375" height="89"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DishRateBranding" translatesAutoresizingMaskIntoConstraints="NO" id="WPr-yi-vHT">
@@ -84,6 +84,17 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="pZI-ev-WiA">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <attributedString key="attributedTitle">
+                            <fragment content="Pull to refresh">
+                                <attributes>
+                                    <font key="NSFont" metaFont="smallSystem"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t2s-Mq-Nh7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -195,7 +206,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2825" y="235"/>
+            <point key="canvasLocation" x="2870" y="399"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="fFv-he-w83">
@@ -321,7 +332,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q08-oS-c0v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1210.4000000000001" y="17.541229385307346"/>
+            <point key="canvasLocation" x="-1639" y="-59"/>
         </scene>
         <!--Meals-->
         <scene sceneID="1bn-bP-gOg">
@@ -341,7 +352,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uHK-Wi-3Ql" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="522.39999999999998" y="398.95052473763121"/>
+            <point key="canvasLocation" x="450" y="399"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="UQ5-ls-bhE">
@@ -525,7 +536,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gBj-QR-zMi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-370.39999999999998" y="1329.9850074962519"/>
+            <point key="canvasLocation" x="-417" y="1162"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SYU-c7-X4m">
@@ -582,9 +593,9 @@
         <image name="sign-in-btn" width="320" height="46"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="6C4-Mg-POt"/>
         <segue reference="AoU-5g-otX"/>
         <segue reference="TW2-wI-vbb"/>
-        <segue reference="4Lo-kv-itd"/>
-        <segue reference="6C4-Mg-POt"/>
+        <segue reference="TlK-3N-sqt"/>
     </inferredMetricsTieBreakers>
 </document>

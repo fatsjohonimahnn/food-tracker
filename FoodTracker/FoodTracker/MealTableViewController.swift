@@ -28,6 +28,9 @@ class MealTableViewController: UITableViewController {
         // NSCache has built in functions like countLimit
         imageCache.countLimit = 50 // Cache up to 50 UIImage(s)
         
+        // Add support for pull-to-refresh on the table view.
+        self.refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: UIControlEvents.valueChanged)
+        
 //        // Use the edit button item provided by the table view controller.
 //        navigationItem.leftBarButtonItem = editButtonItem
 //        navigationItem.leftBarButtonItem?.title = ""
@@ -54,14 +57,21 @@ class MealTableViewController: UITableViewController {
         } else {
             print ("thePresenter is not RegisterViewController")
         }
-            
+        
+        // Update to allow Scroll-to-Refresh
         if BackendlessManager.sharedInstance.isUserLoggedIn() {
-        // calling .loadMeals from BEManager with the closure
-        BackendlessManager.sharedInstance.loadMeals { mealData in
             
-            self.meals += mealData
-            self.tableView.reloadData()
-            }
+            refresh(sender: self)
+            
+//        } else {
+//            
+//            // Moved to the refresh func below
+//            // calling .loadMeals from BEManager with the closure
+//            BackendlessManager.sharedInstance.loadMeals { mealData in
+//            
+//                self.meals += mealData
+//                self.tableView.reloadData()
+//                }
             
         } else {
             
@@ -75,6 +85,30 @@ class MealTableViewController: UITableViewController {
             }
         }
     }
+    
+    // Create a refresh func to call when refresh action taken
+    func refresh(sender: AnyObject) {
+        
+        if BackendlessManager.sharedInstance.isUserLoggedIn() {
+            
+            // Updated loadMeals in BEManager to throw error if fails
+            BackendlessManager.sharedInstance.loadMeals(
+                
+                completion: { mealData in
+                    
+                    // remove the += or else we duplicate the meals
+                    self.meals = mealData
+                    self.tableView.reloadData()
+                    self.refreshControl?.endRefreshing()
+                },
+                
+                error: {
+                    self.tableView.reloadData()
+                    self.refreshControl?.endRefreshing()
+            })
+        }
+    }
+    
     // Add for action selector on custom UIBarButtonItem
     func onEditButton(sender: UIBarButtonItem) {
         

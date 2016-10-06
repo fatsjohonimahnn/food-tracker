@@ -352,10 +352,11 @@ class BackendlessManager {
         }
     }
     
+    // Updated to allow error throwing for pull-to-refresh func in MTVC
     // completion is a closure that when called points to an array of MealData
     // job is to load and hand off to someone else, no VC should touch this
     // closure is called not the loadMeals func
-    func loadMeals(completion: @escaping ([MealData]) -> ()) {
+    func loadMeals(completion: @escaping ([MealData]) -> (), error: @escaping () -> ()) {
         
         let dataStore = backendless.persistenceService.of(Meal.ofClass())
         
