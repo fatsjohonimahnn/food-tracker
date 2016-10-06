@@ -1,50 +1,77 @@
-# food-tracker
+# Dish-Rater
 Track and rate meals
 
 Originally, this project was created from Apple's "Start Developing iOS Apps" but has been dramatically changed to allow Backendless data base services and other features listed below.
 
 https://developer.apple.com/library/content/referencelibrary/GettingStarted/DevelopiOSAppsSwift/index.html#//apple_ref/doc/uid/TP40015214-CH2-SW1
 
-Below is a list of notes taken from the site that helped me and may be important for junior developers... enjoy!
+---------------------------------------------------------------
+Skip to "Main Scene" (bypass login each time app opens)
 
-This is a list of topics covered in this sample:
+See notes in AppDelegate
 
-Fixing Stack Views
-Configuring text field’s keyboard
-About Delegates
-Set up the UITextFieldDelegate
-	First Responders
-Work With View Controllers
-Image View Aspect Ratios & Interactions
-Tap gesture recognizer
-	Create an Image Picker to Respond to User Taps
-Implement A Custom Control
-	Custom UIView
-	Add Buttons to the View (programmatically)
-	Implement the Button Action
-Define Your Data Model
-	Unit Tests
-Create a Table View
-	Turn off Cell highlighting when user taps
-	Turn off user interaction with cell contents but allow click to segue
-UITableViewDataSource protocol and UITableViewDelegate protocol
-Implement Navigation
-Create an Unwind Segue 1/2
-Disable Saving When the User Doesn't Enter an Item Name
-Implement Edit and Delete Behavior
-Update the implementation of unwindToMealList(_:) to add or replace meals 2/2
-Cancel an Edit to an Existing Meal
-Support Deletion
-Persist Data
+---------------------------------------------------------------
+Use a Regular Expression to check if email field is in proper format
 
+See Utility
 
+static func isValidEmail(emailAddress: String) -> Bool {
+    
+    let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+    let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
+    return emailPredicate.evaluate(with: emailAddress)
+}
+-----------------------------------------------------------------
+Singleton Pattern - only one instance of a singleton class can exist
 
+See Utility and BackendlessManager
 
+class BackendlessManager {
+    
+    // This gives access to the one and only instance.
+    static let sharedInstance = BackendlessManager()
+    
+    // This prevents others from using the default '()' initializer for this class.
+    private init() {}
+
+-----------------------------------------------------------------
+Persist Data for non-logged in users
+
+see MealData
 
 
+----------------------------------------------------------------
+Passing data to a VC inside a TabBarController and UINavigationContoller
 
+see RegisterViewController and MealTableViewController:
 
+// After registering, let TV Scene know so we can load sample data one time from this segue
+override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    
+    let barVC = segue.destination as! UITabBarController
+    let navVC = barVC.viewControllers![0] as! UINavigationController
+    let destinationVC = navVC.topViewController as! MealTableViewController
+    
+    destinationVC.isPresentingVCRegister = true
+}
 
+// Create an optional to capture the value in the destinationVC
+var isPresentingVCRegister: Bool? = false
+
+-----------------------------------------------------------------
+VC presented in 2 different ways, dismiss or pop?
+
+see MealViewController
+
+let isPresentingInAddMealMode = presentingViewController is UINavigationController
+
+if isPresentingInAddMealMode {
+    dismiss(animated: true, completion: nil)
+} else {
+    navigationController!.popViewController(animated: true)
+}
+
+----------------------------------------------------------------
 
 
 ----------------------------------------------------------------
@@ -176,7 +203,7 @@ In Atin > Interaction
 
 
 ---------------------
-******
+
 Tap gesture recognizer
 
 Object library:

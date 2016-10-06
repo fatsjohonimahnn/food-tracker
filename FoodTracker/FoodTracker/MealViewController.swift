@@ -58,10 +58,6 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
-    
-    
     // MARK: UITextFieldDelegate
     
     // UITextFieldDelegate, called when Return tapped on keyboard
@@ -167,7 +163,7 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
                                                         
                                                         
                     self.meal?.replacePhoto = false // Reset this just in case we did a photo replacement.
-                   self.performSegue(withIdentifier: "unwindToMealList", sender: self)
+                    self.performSegue(withIdentifier: "unwindToMealList", sender: self)
                 },
                                                        
                 error: {
@@ -196,13 +192,14 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
 
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         
-        _ = self.navigationController?.popViewController(animated: true)
+        // Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways.
+        let isPresentingInAddMealMode = presentingViewController is UINavigationController
         
-        dismiss(animated: true, completion: nil)
-        
-       // performSegue(withIdentifier: "backToTV", sender: sender)
-        
-        
+        if isPresentingInAddMealMode {
+            dismiss(animated: true, completion: nil)
+        } else {
+            navigationController!.popViewController(animated: true)
+        }
     }
     
     // MARK: Actions

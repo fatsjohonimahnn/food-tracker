@@ -110,17 +110,17 @@
 		7E867F2C1D89E2C400678237 /* FoodTracker */ = {
 			isa = PBXGroup;
 			children = (
-				7E3EDA1B1D9AE1340066EBC2 /* Utility.swift */,
 				7E867F2D1D89E2C400678237 /* AppDelegate.swift */,
+				7E3EDA1B1D9AE1340066EBC2 /* Utility.swift */,
+				7ECE784A1D94600400652E77 /* BackendlessManager.swift */,
 				7EBBE72F1D92EB360099DAFA /* LoginViewController.swift */,
 				7E079AF01D9AEB3A0043AC54 /* RegisterViewController.swift */,
-				7ECE784A1D94600400652E77 /* BackendlessManager.swift */,
-				7E867F531D8B31C100678237 /* MealTableViewController.swift */,
 				7E867F2F1D89E2C400678237 /* MealViewController.swift */,
-				7E867F511D8B2B7800678237 /* MealTableViewCell.swift */,
+				7E867F3F1D8AFDCB00678237 /* RatingControl.swift */,
 				7E867F4F1D8B1C1D00678237 /* MealData.swift */,
 				7EBBE72D1D92E6A10099DAFA /* Meal.swift */,
-				7E867F3F1D8AFDCB00678237 /* RatingControl.swift */,
+				7E867F511D8B2B7800678237 /* MealTableViewCell.swift */,
+				7E867F531D8B31C100678237 /* MealTableViewController.swift */,
 				7E0566011DA1D00500AB912D /* SettingsVC.swift */,
 				7E867F311D89E2C400678237 /* Main.storyboard */,
 				7E867F341D89E2C400678237 /* Assets.xcassets */,

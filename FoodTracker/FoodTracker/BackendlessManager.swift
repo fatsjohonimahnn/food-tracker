@@ -31,7 +31,7 @@ class BackendlessManager {
     
     func initApp() {
         
-        // First, init Backendless! called in AppDelegate
+        // First, init Backendless! called in AppDelegate when app didFinishLaunching
         backendless.initApp(APP_ID, secret:SECRET_KEY, version:VERSION_NUM)
         backendless.userService.setStayLoggedIn(true)
     }
@@ -87,7 +87,7 @@ class BackendlessManager {
         // First, check if user is actually logged in
         if isUserLoggedIn() {
             
-            // If they are currently logged in - go ahead and log the out
+            // If they are currently logged in - go ahead and log them out
             backendless.userService.logout( { (user: Any!) -> Void in
                     print("User logged out!")
                     completion()
@@ -105,13 +105,14 @@ class BackendlessManager {
         }
     }
     
-    
     func savePhotoAndThumbnail(mealToSave: Meal, photo: UIImage, completion: @escaping () -> (), error: @escaping () -> ()) {
         
         //
         // Upload the thumbnail first, bc if we cant save a small thumbnail, how can we save a large image 
         //
         
+        
+        // creates a universal unique identifier
         let uuid = NSUUID().uuidString
         //print("\(uuid)")
         
@@ -130,6 +131,7 @@ class BackendlessManager {
         
         //first attempt to Upload
         backendless.fileService.upload(
+            // put the thumbnail in a photos folder and give the uuid a "thumb" header
             "photos/\(backendless.userService.currentUser.objectId!)/thumb_\(uuid).jpg",
             content: thumbnailData,
             overwrite: true,
@@ -138,12 +140,14 @@ class BackendlessManager {
             response: { (uploadedFile: BackendlessFile?) -> Void in
                 print("Thmbnail image uploaded: \(uploadedFile?.fileURL!)")
                 
+                // set the Meal class equal to the DB file
                 mealToSave.thumbnailUrl = uploadedFile?.fileURL!
                 
                 //
                 // Upload full size photo, if thumbnail was successful
                 //
                 
+                // take the fullsize image but lower its quality to .2
                 let fullSizeData = UIImageJPEGRepresentation(photo, 0.2);
                 
                 // second attempt to upload if the first was successful
@@ -173,17 +177,21 @@ class BackendlessManager {
         })
     }
     
-    
-    // MealData is the old class, made some changes
+    // MealData is the old class that we use for persisting data on the phone archiver
+    // It shares properties with Meal class on BE so we can still use MealData in the parameter
+    // HOWEVER, we need to set the acutal meal to save as the BE Meal class
     func saveMeal(mealData: MealData, completion: @escaping () -> (), error: @escaping () -> ()) {
         
-        // save a NEW meal
+        // MealData shares objectId with Meal
         if mealData.objectId == nil {
             
             //
             // Create a new Meal along with a photo and thumbnail image
             //
-        
+            
+            
+            // Make sure we are using the BE Meal class 
+            // and save the data from MealData to the BE Meal
             let mealToSave = Meal()
             mealToSave.name = mealData.name
             mealToSave.rating = mealData.rating
@@ -201,7 +209,7 @@ class BackendlessManager {
                             
                             print("Meal: \(meal.objectId!), name: \(meal.name), photoUrl: \"\(meal.photoUrl!)\", rating: \"\(meal.rating)\"")
                             
-                            // this is where we set the meal data from TVC on the meal
+                            // this is where we set the MealData from TVC on the Meal
                             // this stops from making duplicate records over and over again !!!!!!!!!!!!!
                             mealData.objectId = meal.objectId
                             mealData.photoUrl = meal.photoUrl
@@ -221,7 +229,7 @@ class BackendlessManager {
                     error()
                 })
             
-            // are we replacing the meal data? set to true
+            // are we replacing the MealData photo? set to true
         } else if mealData.replacePhoto {
             
             //
@@ -243,17 +251,17 @@ class BackendlessManager {
                         response: { (meal: Any?) -> Void in
                             
                             //We found the Meal to Update
-                            let meal = meal as! Meal
+                            let oldMeal = meal as! Meal
                             
                             // Cache old URLs for removal!
-                            let oldPhotoUrl = meal.photoUrl!
-                            let oldthumbnailUrl = meal.thumbnailUrl!
+                            let oldPhotoUrl = oldMeal.photoUrl!
+                            let oldthumbnailUrl = oldMeal.thumbnailUrl!
                             
                             //Update the Meal with the new dataStore
-                            meal.name = mealData.name
-                            meal.rating = mealData.rating
-                            meal.photoUrl = mealToSave.photoUrl
-                            meal.thumbnailUrl = mealToSave.thumbnailUrl
+                            oldMeal.name = mealData.name
+                            oldMeal.rating = mealData.rating
+                            oldMeal.photoUrl = mealToSave.photoUrl
+                            oldMeal.thumbnailUrl = mealToSave.thumbnailUrl
                             
                             // Save the updated meal
                             self.backendless.data.save( meal,
@@ -365,7 +373,6 @@ class BackendlessManager {
                 var mealData = [MealData]()
                 
                 for meal in (meals?.data)! {
-                    
                     
                     // checks every meal, to collect every instance of a meal in BE, we create the meal, photo set to nil for now
                     let meal = meal as! Meal

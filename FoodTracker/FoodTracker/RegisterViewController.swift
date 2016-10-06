@@ -16,8 +16,6 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var passwordConfirmTextField: UITextField!
     @IBOutlet weak var registerBtn: UIButton!
     
- //   var isPresentingVCRegister: Bool = false
-    
     let backendless = Backendless.sharedInstance()
     
     override func viewDidLoad() {
@@ -44,14 +42,14 @@ class RegisterViewController: UIViewController {
         }
     }
     
+    // After registering, let TV Scene know so we can load sample data one time from this segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        let barViewControllers = segue.destination as! UITabBarController
-        let nav = barViewControllers.viewControllers![0] as! UINavigationController
-        let destinationViewController = nav.topViewController as! MealTableViewController
+        let barVC = segue.destination as! UITabBarController
+        let navVC = barVC.viewControllers![0] as! UINavigationController
+        let destinationVC = navVC.topViewController as! MealTableViewController
         
-        destinationViewController.isPresentingVCRegister = true
-        
+        destinationVC.isPresentingVCRegister = true
     }
     
     @IBAction func register(_ sender: UIButton) {

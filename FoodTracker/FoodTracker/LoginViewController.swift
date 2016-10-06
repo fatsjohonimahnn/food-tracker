@@ -67,12 +67,12 @@ class LoginViewController: UIViewController {
                 self.performSegue(withIdentifier: "loginToNav", sender: sender)
             },
                 
-                error: { message in
+            error: { message in
                     
-                    self.spinner.stopAnimating()
+                self.spinner.stopAnimating()
                     
-                    Utility.showAlert(viewController: self, title: "Login Errors", message: message)
-            })
+                Utility.showAlert(viewController: self, title: "Login Errors", message: message)
+        })
     }
     
     @IBAction func createAccountBtn(_ sender: UIButton) {

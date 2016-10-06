@@ -27,7 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // First make sure we are in the Main.storyboard
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
-// Make sure to give starting Navigation Controller a SB id in idin
+            // Make sure to give starting scene a SB id in idin
+            // Added the tab bar so we need to give the id to the tab bar scene
             self.window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "tabBarController")
         }
         
