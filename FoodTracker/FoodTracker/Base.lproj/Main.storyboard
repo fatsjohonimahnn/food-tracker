@@ -74,7 +74,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Your Meals" id="dE9-jQ-Iv7">
-                        <barButtonItem key="leftBarButtonItem" title=" " id="W98-0n-0lF">
+                        <barButtonItem key="leftBarButtonItem" image="edit-symbol" id="W98-0n-0lF">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="plus-symbol" id="gYh-2M-d0e">
@@ -474,35 +474,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="Hew-Ew-ZFe">
-                                <subviews>
-                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="u0g-T8-IYW"/>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZOz-a6-1zo">
-                                        <state key="normal" title="Log Out"/>
-                                        <connections>
-                                            <action selector="logout:" destination="Rf5-ix-hEb" eventType="touchUpInside" id="hqo-Sb-ogR"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uPQ-RI-LM7">
-                                        <state key="normal" title="Create Account"/>
-                                        <connections>
-                                            <action selector="createAccount:" destination="Rf5-ix-hEb" eventType="touchUpInside" id="U2r-gH-tPK"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uPQ-RI-LM7">
+                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="Vgh-bT-X6h"/>
+                                    <constraint firstAttribute="height" constant="30" id="sGG-fR-0zN"/>
+                                </constraints>
+                                <state key="normal" title="Create Account"/>
+                                <connections>
+                                    <action selector="createAccount:" destination="Rf5-ix-hEb" eventType="touchUpInside" id="U2r-gH-tPK"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="aDd-Nf-FDc">
+                                <color key="color" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZOz-a6-1zo">
+                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="gGO-72-FRu"/>
+                                    <constraint firstAttribute="width" constant="65" id="tqN-Oi-aoX"/>
+                                </constraints>
+                                <state key="normal" title="Log Out"/>
+                                <connections>
+                                    <action selector="logout:" destination="Rf5-ix-hEb" eventType="touchUpInside" id="hqo-Sb-ogR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Hew-Ew-ZFe" firstAttribute="top" secondItem="OqS-Dk-VoM" secondAttribute="bottom" constant="60" id="PKj-cN-KbG"/>
-                            <constraint firstItem="Hew-Ew-ZFe" firstAttribute="centerX" secondItem="tCw-gB-xRa" secondAttribute="centerX" id="Qkp-tt-Dou"/>
+                            <constraint firstItem="uPQ-RI-LM7" firstAttribute="top" secondItem="aDd-Nf-FDc" secondAttribute="bottom" constant="58" id="4Rp-dj-82w"/>
+                            <constraint firstItem="aDd-Nf-FDc" firstAttribute="centerY" secondItem="tCw-gB-xRa" secondAttribute="centerY" constant="-176.5" id="8Vg-89-AXM"/>
+                            <constraint firstItem="uPQ-RI-LM7" firstAttribute="centerX" secondItem="tCw-gB-xRa" secondAttribute="centerX" id="H7u-gU-n8G"/>
+                            <constraint firstItem="ZOz-a6-1zo" firstAttribute="centerX" secondItem="tCw-gB-xRa" secondAttribute="centerX" id="PQo-UH-uCL"/>
+                            <constraint firstItem="aDd-Nf-FDc" firstAttribute="centerX" secondItem="tCw-gB-xRa" secondAttribute="centerX" id="Xif-rS-Nhb"/>
+                            <constraint firstItem="ZOz-a6-1zo" firstAttribute="top" secondItem="uPQ-RI-LM7" secondAttribute="bottom" constant="55" id="lUN-0d-PGe"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="gear_black_small" id="Ve2-8j-DvH"/>
                     <connections>
                         <outlet property="createAccount" destination="uPQ-RI-LM7" id="xhM-9o-W0v"/>
                         <outlet property="logoutButton" destination="ZOz-a6-1zo" id="I34-PM-0lL"/>
-                        <outlet property="spinner" destination="u0g-T8-IYW" id="V4s-LF-fa5"/>
+                        <outlet property="spinner" destination="aDd-Nf-FDc" id="zsS-OH-try"/>
                         <segue destination="O3Z-Nl-MAz" kind="presentation" identifier="goToLogin" id="TW2-wI-vbb"/>
                         <segue destination="Rog-3K-Mqo" kind="presentation" identifier="goToRegister" id="4Lo-kv-itd"/>
                     </connections>
@@ -554,6 +566,7 @@
         <image name="Meal_icons" width="20" height="20"/>
         <image name="add-a-photo-bg" width="304" height="304"/>
         <image name="check" width="39" height="26"/>
+        <image name="edit-symbol" width="35" height="30"/>
         <image name="exit" width="34" height="34"/>
         <image name="food-tracker-background-blur" width="414" height="736"/>
         <image name="gear_black_small" width="21" height="21"/>
@@ -565,8 +578,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="AoU-5g-otX"/>
-        <segue reference="Zlq-MO-BpR"/>
-        <segue reference="TlK-3N-sqt"/>
+        <segue reference="TW2-wI-vbb"/>
+        <segue reference="4Lo-kv-itd"/>
         <segue reference="6C4-Mg-POt"/>
     </inferredMetricsTieBreakers>
 </document>

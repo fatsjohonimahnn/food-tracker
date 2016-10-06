@@ -131,7 +131,7 @@ class MealTableViewController: UITableViewController {
                 
                     completion: { data in
                     
-                        // We got the image data! Use it ti create a UIImage for our cell's
+                        // We got the image data! Use it to create a UIImage for our cell's
                         // UIImageView. Then, stop the activity spinner
                         if let image = UIImage(data: data) {
                         
@@ -158,7 +158,7 @@ class MealTableViewController: UITableViewController {
             return cell
     }
     
-    // updated to use cache to get images that are already loaded
+    // updated to add closures for checking and adding cache
     //func loadImageFromUrl(cell: MealTableViewCell, thumbnailUrl: String) {
     func loadImageFromUrl(thumbnailUrl: String, completion: @escaping (Data) -> (), loadError: @escaping () -> ()) {
         
