@@ -18,10 +18,15 @@ class MealTableViewController: UITableViewController {
     
     var isPresentingVCRegister: Bool? = false
     
+    // Create a cache that uses keys of type NSString to point to value types of UIImage.
+    // NSCache will dump old cache if we get memory warnings
+    var imageCache = NSCache<NSString, UIImage>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("\(isPresentingVCRegister)")
+        // NSCache has built in functions like countLimit
+        imageCache.countLimit = 50 // Cache up to 50 UIImage(s)
         
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
@@ -55,9 +60,7 @@ class MealTableViewController: UITableViewController {
             if let savedMeals = loadMealsFromArchiver() {
                 meals += savedMeals
             } else {
-                // Load the sample data.
-
-
+                
                 loadSampleMeals()
             }
         }
@@ -110,22 +113,61 @@ class MealTableViewController: UITableViewController {
         cell.photoImageView.image = nil
         cell.ratingControl.rating = meal.rating
 
-        // Added thumbnailUrl
+        // For NSCache, if we have the cache key we put it on the cell when it gets created
         if BackendlessManager.sharedInstance.isUserLoggedIn() && meal.thumbnailUrl != nil {
-            loadImageFromUrl(cell: cell, thumbnailUrl: meal.thumbnailUrl!)
-        } else {
-            cell.photoImageView.image = meal.photo
-        }
         
-        return cell
+            // Fist check if the cache key is available
+            if imageCache.object(forKey: meal.thumbnailUrl! as NSString) != nil {
+                
+                // If the Url for the thumbnail is in the cache already-get the UIImage that belongs to it.
+                cell.photoImageView.image = imageCache.object(forKey: meal.thumbnailUrl! as NSString)
+                
+            } else {
+                
+                cell.spinner.startAnimating()
+                
+                // load image from Url as before
+                loadImageFromUrl(thumbnailUrl: meal.thumbnailUrl!,
+                
+                    completion: { data in
+                    
+                        // We got the image data! Use it ti create a UIImage for our cell's
+                        // UIImageView. Then, stop the activity spinner
+                        if let image = UIImage(data: data) {
+                        
+                            cell.photoImageView.image = image
+                            
+                            // Set new image to be cached
+                            // Since we went to the trouble of pulling down the image data and
+                            // building a UIImage, lets cache the UIImage using the URL as the key
+                            self.imageCache.setObject(image, forKey: meal.thumbnailUrl! as NSString)
+                        }
+                        
+                        cell.spinner.stopAnimating()
+                        
+                    },
+                
+                    loadError: {
+                        cell.spinner.stopAnimating()
+                    })
+                }
+            } else {
+                cell.photoImageView.image = meal.photo
+            }
+        
+            return cell
     }
     
-    // Added thumbnailUrl
-    func loadImageFromUrl(cell: MealTableViewCell, thumbnailUrl: String) {
+    // updated to use cache to get images that are already loaded
+    //func loadImageFromUrl(cell: MealTableViewCell, thumbnailUrl: String) {
+    func loadImageFromUrl(thumbnailUrl: String, completion: @escaping (Data) -> (), loadError: @escaping () -> ()) {
         
-        cell.spinner.startAnimating()
+        // Moved above
+        //cell.spinner.startAnimating()
         
         let url = URL(string: thumbnailUrl )!
+        
+        print("loadImageFromUrl: \(url)")
         
         let session = URLSession.shared
         
@@ -134,25 +176,32 @@ class MealTableViewController: UITableViewController {
             if error == nil {
                 
                 do {
-                    
                     let data = try Data(contentsOf: url, options: [])
                     
                     DispatchQueue.main.async {
+                        completion(data)
                         
+                        // Moved above
                         // We got the image data! Use it to create a UIImage for our cell's
                         // UIImageView. Then, stop the activity spinner.
-                        cell.photoImageView.image = UIImage(data: data)
-                        cell.spinner.stopAnimating()
+                        //cell.photoImageView.image = UIImage(data: data)
+                        //cell.spinner.stopAnimating()
                     }
                     
                 } catch {
                     print("NSData Error: \(error)")
-                    cell.spinner.stopAnimating()
+                    //cell.spinner.stopAnimating()
+                    DispatchQueue.main.async {
+                        loadError()
+                    }
                 }
                 
             } else {
                 print("NSURLSession Error: \(error)")
-                cell.spinner.stopAnimating()
+                //cell.spinner.stopAnimating()
+                DispatchQueue.main.async {
+                    loadError()
+                }
             }
         })
         
@@ -168,8 +217,6 @@ class MealTableViewController: UITableViewController {
 
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
-        
         
         if editingStyle == .delete {
             

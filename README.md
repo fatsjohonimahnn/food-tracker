@@ -72,6 +72,40 @@ if isPresentingInAddMealMode {
 }
 
 ----------------------------------------------------------------
+NSCache Image Cacheing
+
+see MealTableViewController
+
+More info on NSCache:
+    http://nshipster.com/nscache/
+    
+    http://stackoverflow.com/questions/10502809/objective-c-benefits-of-using-nscache-over-a-static-nsmutabledictionary
+    
+    http://blog.csdn.net/chuanyituoku/article/details/17336443
+    
+// Create a cache that uses keys of type NSString to point to value types of UIImage.
+// NSCache will dump old cache if we get memory warnings
+var imageCache = NSCache<NSString, UIImage>()
+
+in viewDidLoad:
+// NSCache has built in functions like countLimit
+imageCache.countLimit = 50 // Cache up to 50 UIImage(s)
+
+in tableView...cellForRowAt indexPath:
+// For NSCache, if we have the cache key we put it on the cell when it gets created
+if BackendlessManager.sharedInstance.isUserLoggedIn() && meal.thumbnailUrl != nil {
+
+if imageCache.object(forKey: meal.thumbnailUrl! as NSString) != nil {
+    
+    // If the URL for the thumbnail is in the cache already - get the UIImage that belongs to it.
+    cell.photoImageView.image = imageCache.object(forKey: meal.thumbnailUrl! as NSString)
+    
+}
+...
+// Set new image to be cached
+// Since we went to the trouble of pulling down the image data and
+// building a UIImage lets cache the UIImage using the URL as the key.
+self.imageCache.setObject(image, forKey: meal.thumbnailUrl! as NSString)
 
 
 ----------------------------------------------------------------
