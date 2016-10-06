@@ -107,6 +107,57 @@ if imageCache.object(forKey: meal.thumbnailUrl! as NSString) != nil {
 // building a UIImage lets cache the UIImage using the URL as the key.
 self.imageCache.setObject(image, forKey: meal.thumbnailUrl! as NSString)
 ----------------------------------------------------------------
+implement pull to refresh
+
+Interface Builder (IB):
+
+VC (yellow icon) > atin > Table View Controller > Refreshing: Enabled
+	creates a "Refresh Control" 
+Add Title if desired
+
+Creates a "Refresh Control"
+	Didn't change anything except added Title
+
+in TableViewController:
+
+// Create a refresh func to call when refresh action taken
+func refresh(sender: AnyObject) {
+        
+    if BackendlessManager.sharedInstance.isUserLoggedIn() {
+        
+        // Call the loadMeals from 
+        // Updated loadMeals in BEManager to throw error if fails
+        BackendlessManager.sharedInstance.loadMeals(
+            
+            completion: { mealData in
+                
+                // remove the += or else we duplicate the meals
+                self.meals = mealData
+                self.tableView.reloadData()
+                self.refreshControl?.endRefreshing()
+            },
+            
+            error: {
+                self.tableView.reloadData()
+                self.refreshControl?.endRefreshing()
+        })
+    }
+}
+
+in viewDidLoad:
+
+// Add support for pull-to-refresh on the table view.
+self.refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: UIControlEvents.valueChanged)
+
+// Check if user is logged in then refresh
+if BackendlessManager.sharedInstance.isUserLoggedIn() {
+            
+    refresh(sender: self)
+            
+} else Load any saved meals, or load sample data
+
+
+----------------------------------------------------------------
 Fix the Edit button on TableView
 
 see MealTableViewController

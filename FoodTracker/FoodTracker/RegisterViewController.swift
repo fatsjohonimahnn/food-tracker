@@ -50,7 +50,7 @@ class RegisterViewController: UIViewController {
         let destinationVC = navVC.topViewController as! MealTableViewController
         
         destinationVC.isPresentingVCRegister = true
-        print("Coming from RegisterVC? \(destinarionVC.isPresentingVCRegister)")
+        print("Coming from RegisterVC? \(destinationVC.isPresentingVCRegister)")
     }
     
     @IBAction func register(_ sender: UIButton) {

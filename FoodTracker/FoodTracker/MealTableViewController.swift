@@ -25,6 +25,8 @@ class MealTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("Coming from RegisterVC? \(isPresentingVCRegister)")
+        
         // NSCache has built in functions like countLimit
         imageCache.countLimit = 50 // Cache up to 50 UIImage(s)
         
@@ -46,32 +48,21 @@ class MealTableViewController: UITableViewController {
         // Set the button on the navbar
         self.navigationItem.leftBarButtonItem = leftBarButtonItem
         
-        if isPresentingVCRegister == true {
-            
-            loadSampleMeals()
-                        
-            isPresentingVCRegister = false
-            
-            print("\(isPresentingVCRegister)")
-            
-        } else {
-            print ("thePresenter is not RegisterViewController")
-        }
-        
         // Update to allow Scroll-to-Refresh
         if BackendlessManager.sharedInstance.isUserLoggedIn() {
             
-            refresh(sender: self)
-            
-//        } else {
-//            
-//            // Moved to the refresh func below
-//            // calling .loadMeals from BEManager with the closure
-//            BackendlessManager.sharedInstance.loadMeals { mealData in
-//            
-//                self.meals += mealData
-//                self.tableView.reloadData()
-//                }
+            if isPresentingVCRegister == true {
+                
+                loadSampleMeals()
+                
+                isPresentingVCRegister = false
+                
+                print("\(isPresentingVCRegister)")
+                
+            } else {
+                print ("thePresenter is not RegisterViewController")
+                refresh(sender: self)
+            }
             
         } else {
             
