@@ -25,7 +25,7 @@ class MealTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("Coming from RegisterVC? \(isPresentingVCRegister)")
+        print("Coming from RegisterVC: \(isPresentingVCRegister) or social Login: \(BackendlessManager.sharedInstance.isSocialLogin) ")
         
         // NSCache has built in functions like countLimit
         imageCache.countLimit = 50 // Cache up to 50 UIImage(s)
@@ -51,16 +51,17 @@ class MealTableViewController: UITableViewController {
         // Update to allow Scroll-to-Refresh
         if BackendlessManager.sharedInstance.isUserLoggedIn() {
             
-            if isPresentingVCRegister == true {
+            if isPresentingVCRegister! || BackendlessManager.sharedInstance.isSocialLogin! == true {
                 
                 loadSampleMeals()
                 
                 isPresentingVCRegister = false
-                
-                print("\(isPresentingVCRegister)")
+                BackendlessManager.sharedInstance.isSocialLogin = false
+                                
+                print("From RegisterVC: \(isPresentingVCRegister), from socialLogin: \(BackendlessManager.sharedInstance.isSocialLogin)")
                 
             } else {
-                print ("thePresenter is not RegisterViewController")
+                print ("thePresenter is not RegisterViewController nor social login")
                 refresh(sender: self)
             }
             

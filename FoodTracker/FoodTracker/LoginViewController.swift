@@ -47,6 +47,8 @@ class LoginViewController: UIViewController {
             loginBtn.isEnabled = true
         }
     }
+    
+    
     @IBAction func loginWithFB(_ sender: UIButton) {
         
         spinner.startAnimating()
@@ -54,6 +56,7 @@ class LoginViewController: UIViewController {
         BackendlessManager.sharedInstance.loginViaFacebook( completion: {
             
                 self.spinner.stopAnimating()
+            
             },
             
             error: { message in
@@ -70,6 +73,7 @@ class LoginViewController: UIViewController {
         BackendlessManager.sharedInstance.loginViaTwitter( completion: {
             
                 self.spinner.stopAnimating()
+            
             },
             
             error: { message in

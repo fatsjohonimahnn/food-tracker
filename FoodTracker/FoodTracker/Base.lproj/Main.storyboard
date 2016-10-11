@@ -25,7 +25,7 @@
                                     <frame key="frameInset" width="375" height="89"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DishRateBranding" translatesAutoresizingMaskIntoConstraints="NO" id="WPr-yi-vHT">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DishRateBranding" translatesAutoresizingMaskIntoConstraints="NO" id="WPr-yi-vHT">
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="90" id="ldi-cY-Jei"/>
                                                 <constraint firstAttribute="height" constant="90" id="sNM-nD-PLy"/>
@@ -123,7 +123,7 @@
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aKw-sP-ugw" userLabel="whiteView">
                                 <subviews>
-                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="320" image="add-a-photo-bg" translatesAutoresizingMaskIntoConstraints="NO" id="yis-NB-bST">
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="320" image="add-a-photo-bg" translatesAutoresizingMaskIntoConstraints="NO" id="yis-NB-bST">
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="320" id="Olo-wZ-vHk"/>

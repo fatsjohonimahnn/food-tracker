@@ -25,8 +25,10 @@ class BackendlessManager {
     
     let backendless = Backendless.sharedInstance()!
     
+    var isSocialLogin: Bool? = false
+    
     let APP_ID =  "<replace-with-your-app-id>"
-    let SECRET_KEY =  "<replace-with-your-secret-key>"
+    let SECRET_KEY = "<replace-with-your-secret-key>"
     let VERSION_NUM = "v1"
     
     func initApp() {
@@ -98,12 +100,11 @@ class BackendlessManager {
     
     func loginViaFacebook(completion: @escaping () -> (), error: @escaping (String) -> ()) {
         
-        backendless.userService.easyLogin(
-            
-            withFacebookFieldsMapping: ["email":"email"], permissions: ["email"],
+        backendless.userService.easyLogin(withFacebookFieldsMapping: ["email":"email"], permissions: ["email"],
             
             response: {(result : NSNumber?) -> () in
                 print ("Result: \(result)")
+                self.isSocialLogin = true
                 completion()
             },
             
@@ -117,14 +118,15 @@ class BackendlessManager {
         
         backendless.userService.easyLogin(withTwitterFieldsMapping: ["email":"email"],
                                           
-                                          response: {(result : NSNumber?) -> () in
-                                            print ("Result: \(result)")
-                                            completion()
+            response: {(result : NSNumber?) -> () in
+                print ("Result: \(result)")
+                self.isSocialLogin = true 
+                completion()
             },
                                           
-                                          error: { (fault : Fault?) -> () in
-                                            print("Server reported an error: \(fault)")
-                                            error((fault?.message)!)
+            error: { (fault : Fault?) -> () in
+                print("Server reported an error: \(fault)")
+                error((fault?.message)!)
         })
     }
 
@@ -164,7 +166,7 @@ class BackendlessManager {
         //print("\(uuid)")
         
         // create the thumbnail
-        let size = photo.size.applying(CGAffineTransform(scaleX: 0.5, y: 0.5))
+        let size = photo.size.applying(CGAffineTransform(scaleX: 0.75, y: 0.75))
         let hasAlpha = false
         let scale: CGFloat = 0.1
         
@@ -195,7 +197,7 @@ class BackendlessManager {
                 //
                 
                 // take the fullsize image but lower its quality to .2
-                let fullSizeData = UIImageJPEGRepresentation(photo, 0.2);
+                let fullSizeData = UIImageJPEGRepresentation(photo, 0.5);
                 
                 // second attempt to upload if the first was successful
                 self.backendless.fileService.upload(
