@@ -47,6 +47,38 @@ class LoginViewController: UIViewController {
             loginBtn.isEnabled = true
         }
     }
+    @IBAction func loginWithFB(_ sender: UIButton) {
+        
+        spinner.startAnimating()
+        
+        BackendlessManager.sharedInstance.loginViaFacebook( completion: {
+            
+                self.spinner.stopAnimating()
+            },
+            
+            error: { message in
+                
+                self.spinner.stopAnimating()
+                
+                Utility.showAlert(viewController: self, title: "Login Error", message: message)
+            })
+    }
+    @IBAction func loginWithTwitter(_ sender: UIButton) {
+        
+        spinner.startAnimating()
+        
+        BackendlessManager.sharedInstance.loginViaTwitter( completion: {
+            
+                self.spinner.stopAnimating()
+            },
+            
+            error: { message in
+                
+                self.spinner.stopAnimating()
+                
+                Utility.showAlert(viewController: self, title: "Login Error", message: message)
+            })
+    }
     
     @IBAction func loginBtn(_ sender: UIButton) {
         

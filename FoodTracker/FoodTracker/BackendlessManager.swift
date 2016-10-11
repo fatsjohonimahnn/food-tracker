@@ -25,8 +25,8 @@ class BackendlessManager {
     
     let backendless = Backendless.sharedInstance()!
     
-    let APP_ID = "F981560F-4835-A284-FFB8-68E07B664700" //"<replace-with-your-app-id>"
-    let SECRET_KEY = "E8F6B066-9273-A9F1-FF31-9D671C12C500" //"<replace-with-your-secret-key>"
+    let APP_ID =  "<replace-with-your-app-id>"
+    let SECRET_KEY =  "<replace-with-your-secret-key>"
     let VERSION_NUM = "v1"
     
     func initApp() {
@@ -81,6 +81,53 @@ class BackendlessManager {
                 error((fault?.message)!)
         })
     }
+    
+    func handleOpen(open url: URL, completion: @escaping () -> (), error: @escaping () -> ()) {
+        
+        print("handleOpen: url scheme = \(url.scheme)")
+        
+        let user = backendless.userService.handleOpen(url)
+        
+        if user != nil {
+            print("handleOpen: user = \(user)")
+            completion()
+        } else {
+            error()
+        }
+    }
+    
+    func loginViaFacebook(completion: @escaping () -> (), error: @escaping (String) -> ()) {
+        
+        backendless.userService.easyLogin(
+            
+            withFacebookFieldsMapping: ["email":"email"], permissions: ["email"],
+            
+            response: {(result : NSNumber?) -> () in
+                print ("Result: \(result)")
+                completion()
+            },
+            
+            error: { (fault : Fault?) -> () in
+                print("Server reported an error: \(fault)")
+                error((fault?.message)!)
+        })
+    }
+    
+    func loginViaTwitter(completion: @escaping () -> (), error: @escaping (String) -> ()) {
+        
+        backendless.userService.easyLogin(withTwitterFieldsMapping: ["email":"email"],
+                                          
+                                          response: {(result : NSNumber?) -> () in
+                                            print ("Result: \(result)")
+                                            completion()
+            },
+                                          
+                                          error: { (fault : Fault?) -> () in
+                                            print("Server reported an error: \(fault)")
+                                            error((fault?.message)!)
+        })
+    }
+
     
     func logoutUser(completion: @escaping () -> (), error: @escaping (String) -> ()) {
         

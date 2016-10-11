@@ -215,6 +215,7 @@
 				TargetAttributes = {
 					7E867F291D89E2C400678237 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = MGZJFP2D98;
 						LastSwiftMigration = 0800;
 					};
 					7E867F441D8B1AF500678237 = {
@@ -510,6 +511,7 @@
 			baseConfigurationReference = E97A88BCA0F9C3590569394B /* Pods-FoodTracker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = MGZJFP2D98;
 				INFOPLIST_FILE = FoodTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.goyojo.FoodTracker;
@@ -524,6 +526,7 @@
 			baseConfigurationReference = A9721EDAA6C233DA76D434C2 /* Pods-FoodTracker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = MGZJFP2D98;
 				INFOPLIST_FILE = FoodTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.goyojo.FoodTracker;
